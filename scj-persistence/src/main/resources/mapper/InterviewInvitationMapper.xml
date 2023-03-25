@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sc.persistence.app.dao.mysql.apply.InterviewInvitationMapper">
+
+    <resultMap id="BaseResultMap" type="com.sc.persistence.app.dao.dataobject.apply.InterviewInvitationDO">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="userId" column="user_id" jdbcType="BIGINT"/>
+            <result property="coId" column="co_id" jdbcType="BIGINT"/>
+            <result property="jobId" column="job_id" jdbcType="BIGINT"/>
+            <result property="invitationDate" column="invitation_date" jdbcType="TIMESTAMP"/>
+            <result property="interviewDate" column="interview_date" jdbcType="TIMESTAMP"/>
+            <result property="interviewLocation" column="interview_location" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="TINYINT"/>
+            <result property="creator" column="creator" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updater" column="updater" jdbcType="VARCHAR"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="deleted" column="deleted" jdbcType="BIT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,user_id,co_id,
+        job_id,invitation_date,interview_date,
+        interview_location,status,creator,
+        create_time,updater,update_time,
+        deleted
+    </sql>
+</mapper>

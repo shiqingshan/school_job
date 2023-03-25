@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sc.persistence.app.dao.mysql.job.JobInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.sc.persistence.app.dao.dataobject.job.JobInfoDO">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="coId" column="co_id" jdbcType="BIGINT"/>
+            <result property="userId" column="user_id" jdbcType="BIGINT"/>
+            <result property="positionItem" column="position_item" jdbcType="BIGINT"/>
+            <result property="jobName" column="job_name" jdbcType="VARCHAR"/>
+            <result property="jobStatus" column="job_status" jdbcType="TINYINT"/>
+            <result property="creator" column="creator" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updater" column="updater" jdbcType="VARCHAR"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="deleted" column="deleted" jdbcType="BIT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,co_id,user_id,
+        position_item,job_name,job_status,
+        creator,create_time,updater,
+        update_time,deleted
+    </sql>
+</mapper>
