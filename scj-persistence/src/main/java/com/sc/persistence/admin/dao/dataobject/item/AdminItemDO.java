@@ -37,7 +37,7 @@ public class AdminItemDO extends BaseDO implements Serializable {
     /**
      * 菜单类型 0 菜单项,1 按钮
      */
-    private Boolean itemType;
+    private Integer itemType;
 
     /**
      * 图标

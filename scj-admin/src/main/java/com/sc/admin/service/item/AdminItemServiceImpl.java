@@ -1,6 +1,9 @@
 package com.sc.admin.service.item;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.sc.admin.controller.item.vo.ItemCreateReqVO;
+import com.sc.admin.controller.item.vo.ItemResVO;
+import com.sc.admin.convert.item.ItemConvert;
 import com.sc.persistence.admin.dao.dataobject.item.AdminItemDO;
 import com.sc.persistence.admin.dao.mysql.item.AdminItemMapper;
 import org.springframework.stereotype.Service;
@@ -11,8 +14,20 @@ import org.springframework.stereotype.Service;
 */
 @Service
 public class AdminItemServiceImpl extends ServiceImpl<AdminItemMapper, AdminItemDO>
-    implements AdminItemService {
+    implements IAdminItemService {
 
+    /**
+     * @param itemCreateReqVO
+     * @return
+     */
+    @Override
+    public ItemResVO addItem(ItemCreateReqVO itemCreateReqVO) {
+        AdminItemDO adminItemDO = ItemConvert.INSTANCE.convert(itemCreateReqVO);
+        if(save(adminItemDO)){
+            return ItemConvert.INSTANCE.convert(adminItemDO);
+        }
+        return null;
+    }
 }
 
 

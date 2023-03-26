@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 
 import com.sc.common.base.BaseDO;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
