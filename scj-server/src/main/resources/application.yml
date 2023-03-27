@@ -3,6 +3,9 @@ server:
 spring:
   application:
     name: school-job
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     url: jdbc:mysql://192.168.71.102:3306/school_job?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
