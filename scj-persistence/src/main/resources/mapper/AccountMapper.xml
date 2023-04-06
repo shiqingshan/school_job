@@ -2,22 +2,6 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sc.persistence.app.dao.mysql.account.AccountMapper">
+<mapper namespace="com.sc.persistence.account.AccountMapper">
 
-    <resultMap id="BaseResultMap" type="com.sc.persistence.app.dao.dataobject.account.AccountDO">
-            <id property="id" column="id" jdbcType="BIGINT"/>
-            <result property="userId" column="user_id" jdbcType="BIGINT"/>
-            <result property="accountType" column="account_type" jdbcType="TINYINT"/>
-            <result property="creator" column="creator" jdbcType="VARCHAR"/>
-            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-            <result property="updater" column="updater" jdbcType="VARCHAR"/>
-            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
-            <result property="deleted" column="deleted" jdbcType="BIT"/>
-    </resultMap>
-
-    <sql id="Base_Column_List">
-        id,user_id,account_type,
-        creator,create_time,updater,
-        update_time,deleted,profile_picture
-    </sql>
 </mapper>

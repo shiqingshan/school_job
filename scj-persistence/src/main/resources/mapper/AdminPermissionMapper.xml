@@ -2,26 +2,6 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sc.persistence.admin.dao.mysql.permission.AdminPermissionMapper">
+<mapper namespace="com.sc.persistence.permission.AdminPermissionMapper">
 
-    <resultMap id="BaseResultMap" type="com.sc.persistence.admin.dao.dataobject.permission.AdminPermissionDO">
-            <id property="id" column="id" jdbcType="BIGINT"/>
-            <result property="roleId" column="role_id" jdbcType="BIGINT"/>
-            <result property="menuItemId" column="menu_item_id" jdbcType="BIGINT"/>
-            <result property="canView" column="can_view" jdbcType="BIT"/>
-            <result property="canEdit" column="can_edit" jdbcType="BIT"/>
-            <result property="canDelete" column="can_delete" jdbcType="BIT"/>
-            <result property="creator" column="creator" jdbcType="VARCHAR"/>
-            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-            <result property="updater" column="updater" jdbcType="VARCHAR"/>
-            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
-            <result property="deleted" column="deleted" jdbcType="BIT"/>
-    </resultMap>
-
-    <sql id="Base_Column_List">
-        id,role_id,menu_item_id,
-        can_view,can_edit,can_delete,
-        creator,create_time,updater,
-        update_time,deleted
-    </sql>
 </mapper>

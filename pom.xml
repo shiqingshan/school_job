@@ -9,12 +9,13 @@
     <description>school_job</description>
     <packaging>pom</packaging>
     <modules>
-        <module>scj-admin</module>
         <module>scj-commom</module>
         <module>scj-persistence</module>
         <module>scj-app</module>
         <module>scj-server</module>
         <module>scj-starter-web</module>
+        <module>scj-mp-generator</module>
+        <module>scj_model</module>
     </modules>
 
     <properties>
@@ -43,6 +44,11 @@
                 <version>${mybatis-plus.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.sc</groupId>
                 <artifactId>scj-commom</artifactId>
                 <version>${csj.version}</version>
@@ -64,7 +70,7 @@
             </dependency>
             <dependency>
                 <groupId>com.sc</groupId>
-                <artifactId>scj-admin</artifactId>
+                <artifactId>scj_model</artifactId>
                 <version>${csj.version}</version>
             </dependency>
             <dependency>
@@ -75,6 +81,16 @@
             <dependency>
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-jdk8</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
                 <version>${mapstruct.version}</version>
             </dependency>
             <dependency>

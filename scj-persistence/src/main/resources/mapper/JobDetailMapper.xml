@@ -2,26 +2,6 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sc.persistence.app.dao.mysql.job.JobDetailMapper">
+<mapper namespace="com.sc.persistence.job.JobDetailMapper">
 
-    <resultMap id="BaseResultMap" type="com.sc.persistence.app.dao.dataobject.job.JobDetailDO">
-            <id property="id" column="id" jdbcType="BIGINT"/>
-            <result property="jobId" column="job_id" jdbcType="BIGINT"/>
-            <result property="jobDescrip" column="job_descrip" jdbcType="VARCHAR"/>
-            <result property="jobEdu" column="job_edu" jdbcType="VARCHAR"/>
-            <result property="jobQualification" column="job_qualification" jdbcType="VARCHAR"/>
-            <result property="jobAddr" column="job_addr" jdbcType="VARCHAR"/>
-            <result property="creator" column="creator" jdbcType="VARCHAR"/>
-            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-            <result property="updater" column="updater" jdbcType="VARCHAR"/>
-            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
-            <result property="deleted" column="deleted" jdbcType="BIT"/>
-    </resultMap>
-
-    <sql id="Base_Column_List">
-        id,job_id,job_descrip,
-        job_edu,job_qualification,job_addr,
-        creator,create_time,updater,
-        update_time,deleted
-    </sql>
 </mapper>

@@ -11,7 +11,7 @@ public class Result <T>{
     /**
      * 状态
      */
-    private Integer status;
+    private Integer code;
     /**
      * 返回信息
      */

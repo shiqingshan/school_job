@@ -2,21 +2,6 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sc.persistence.app.dao.mysql.company.CompanyMapper">
+<mapper namespace="com.sc.persistence.company.CompanyMapper">
 
-    <resultMap id="BaseResultMap" type="com.sc.persistence.app.dao.dataobject.company.CompanyDO">
-            <id property="id" column="id" jdbcType="BIGINT"/>
-            <result property="name" column="name" jdbcType="BIGINT"/>
-            <result property="creator" column="creator" jdbcType="VARCHAR"/>
-            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-            <result property="updater" column="updater" jdbcType="VARCHAR"/>
-            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
-            <result property="deleted" column="deleted" jdbcType="BIT"/>
-    </resultMap>
-
-    <sql id="Base_Column_List">
-        id,name,creator,
-        create_time,updater,update_time,
-        deleted
-    </sql>
 </mapper>

@@ -20,16 +20,9 @@
     <dependencies>
         <dependency>
             <groupId>com.sc</groupId>
-            <artifactId>scj-persistence</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.sc</groupId>
-            <artifactId>scj-admin</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct</artifactId>
+            <artifactId>scj-starter-web</artifactId>
         </dependency>
     </dependencies>
+
 
 </project>

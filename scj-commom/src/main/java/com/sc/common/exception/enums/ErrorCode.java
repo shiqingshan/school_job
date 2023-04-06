@@ -16,8 +16,8 @@ public enum ErrorCode implements IErrorCode {
     TOO_MANY_REQUESTS(429, "请求过于频繁，请稍后重试"),
 
     // ========== 服务端错误段 ==========
-
     INTERNAL_SERVER_ERROR(500, "系统异常"),
+    SERVICE_ERROR(50001, "业务异常"),
     NOT_IMPLEMENTED(501, "功能未实现/未开启"),
 
     // ========== 自定义错误段 ==========

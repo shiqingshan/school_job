@@ -27,10 +27,6 @@
             <artifactId>scj-app</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.sc</groupId>
-            <artifactId>scj-admin</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
         </dependency>

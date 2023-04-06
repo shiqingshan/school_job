@@ -35,16 +35,16 @@
             <artifactId>jjwt</artifactId>
         </dependency>-->
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.xiaoymin</groupId>
-            <artifactId>knife4j-spring-boot-starter</artifactId>
+            <groupId>com.sc</groupId>
+            <artifactId>scj-persistence</artifactId>
         </dependency>
         <dependency>
             <groupId>com.sc</groupId>
             <artifactId>scj-commom</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
     </dependencies>
 
