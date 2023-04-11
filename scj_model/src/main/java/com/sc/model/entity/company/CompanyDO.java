@@ -4,11 +4,11 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-
 import com.sc.common.base.BaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
 
 /**
  * 企业表
@@ -27,7 +27,27 @@ public class CompanyDO extends BaseDO implements Serializable {
     /**
      * 企业名称
      */
-    private Long name;
+    private String name;
+
+    /**
+     * 企业地址
+     */
+    private String address;
+
+    /**
+     * 企业联系人
+     */
+    private String contact;
+
+   /**
+     * 企业联系人电话
+     */
+    private String contactPhone;
+
+    /**
+     * 工商注册号
+     */
+    private String businessLicense;
 
 
     @TableField(exist = false)

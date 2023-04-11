@@ -2,6 +2,7 @@ import {RouteRecordRaw, createRouter,createWebHistory} from 'vue-router';
 const routes:Array<RouteRecordRaw> =[{
     path: '/',
     name: 'index',
+    redirect: 'p1',
     component: ()=> import("@/layouts/HomeLayout.vue"),
     children:[
         {

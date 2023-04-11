@@ -24,7 +24,7 @@
         </dependency>
         <dependency>
             <groupId>com.sc</groupId>
-            <artifactId>scj-app</artifactId>
+            <artifactId>scj-framework</artifactId>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>

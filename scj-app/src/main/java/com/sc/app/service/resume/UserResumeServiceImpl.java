@@ -4,16 +4,14 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sc.app.convert.resume.UserResumeConvert;
-import com.sc.common.base.PageInfoVO;
 import com.sc.common.base.PageResult;
 import com.sc.common.exception.ServiceException;
-import com.sc.common.exception.enums.ErrorCode;
 import com.sc.model.entity.resume.UserResumeDO;
 import com.sc.model.entity.resume.vo.UserResumeCreateReqVO;
 import com.sc.model.entity.resume.vo.UserResumePageQueryReqVO;
 import com.sc.model.entity.resume.vo.UserResumeResVO;
 import com.sc.model.entity.resume.vo.UserResumeUpdateReqVO;
-import com.sc.persistence.user.UserResumeMapper;
+import com.sc.persistence.resume.UserResumeMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -29,8 +27,8 @@ public class UserResumeServiceImpl extends ServiceImpl<UserResumeMapper, UserRes
     @Override
     public PageResult<UserResumeResVO> getPageUserResumeList(UserResumePageQueryReqVO userResumePageQueryReqVO) {
         UserResumeDO userResumeDO = UserResumeConvert.INSTANCE.convert(userResumePageQueryReqVO);
-        PageInfoVO pageInfo = userResumePageQueryReqVO.getPageInfo();
-        Page<UserResumeDO> page = new Page<>(pageInfo.getPageNum(), pageInfo.getPageSize());
+
+        Page<UserResumeDO> page = new Page<>(userResumePageQueryReqVO.getPageNum(), userResumePageQueryReqVO.getPageSize());
         Page<UserResumeDO> pageRes = page(page, new QueryWrapper<>(userResumeDO));
         long total = pageRes.getTotal();
         List<UserResumeDO> records = pageRes.getRecords();
@@ -48,7 +46,7 @@ public class UserResumeServiceImpl extends ServiceImpl<UserResumeMapper, UserRes
         if(save(userResumeDO)){
             return UserResumeConvert.INSTANCE.convert(userResumeDO);
         }
-        throw new ServiceException(ErrorCode.SERVICE_ERROR.getCode(),"添加用户简历失败");
+        throw new ServiceException("添加用户简历失败");
     }
 
     /**
@@ -61,6 +59,6 @@ public class UserResumeServiceImpl extends ServiceImpl<UserResumeMapper, UserRes
         if(updateById(userResumeDO)){
             return UserResumeConvert.INSTANCE.convert(userResumeDO);
         }
-        throw new ServiceException(ErrorCode.SERVICE_ERROR.getCode(),"更新用户简历失败");
+        throw new ServiceException("更新用户简历失败");
     }
 }

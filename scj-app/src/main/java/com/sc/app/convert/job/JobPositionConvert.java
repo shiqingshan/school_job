@@ -1,10 +1,7 @@
 package com.sc.app.convert.job;
 
 import com.sc.model.entity.job.JobPositionDO;
-import com.sc.model.entity.job.vo.JobPositionCreateReqVO;
-import com.sc.model.entity.job.vo.JobPositionPageQueryReqVO;
-import com.sc.model.entity.job.vo.JobPositionResVO;
-import com.sc.model.entity.job.vo.JobPositionUpdateReqVO;
+import com.sc.model.entity.job.vo.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -23,4 +20,7 @@ public interface JobPositionConvert {
     JobPositionResVO convert(JobPositionDO jobPositionDO);
 
     JobPositionDO convert(JobPositionUpdateReqVO jobPositionUpdateReqVO);
+
+    JobPositionDO convert(JobPositionQueryReqVO jobPositionQueryReqVO);
+
 }

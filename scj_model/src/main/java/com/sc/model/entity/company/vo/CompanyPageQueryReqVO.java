@@ -6,6 +6,6 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class CompanyPageQueryReqVO extends CompanyBaseVO{
-    private PageInfoVO pageInfo;
+public class CompanyPageQueryReqVO extends PageInfoVO {
+
 }

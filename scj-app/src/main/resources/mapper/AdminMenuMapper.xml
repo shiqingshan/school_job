@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="generator.mapper.AdminMenuMapper">
+
+    <resultMap id="BaseResultMap" type="generator.domain.AdminMenuDO">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="label" column="label" jdbcType="VARCHAR"/>
+            <result property="treePath" column="tree_path" jdbcType="VARCHAR"/>
+            <result property="permission" column="permission" jdbcType="VARCHAR"/>
+            <result property="parentId" column="parent_id" jdbcType="BIGINT"/>
+            <result property="path" column="path" jdbcType="VARCHAR"/>
+            <result property="component" column="component" jdbcType="VARCHAR"/>
+            <result property="sequence" column="sequence" jdbcType="INTEGER"/>
+            <result property="icon" column="icon" jdbcType="VARCHAR"/>
+            <result property="style" column="style" jdbcType="VARCHAR"/>
+            <result property="type" column="type" jdbcType="TINYINT"/>
+            <result property="status" column="status" jdbcType="BIT"/>
+            <result property="readonly" column="readonly" jdbcType="BIT"/>
+            <result property="global" column="global" jdbcType="BIT"/>
+            <result property="display" column="display" jdbcType="BIT"/>
+            <result property="description" column="description" jdbcType="VARCHAR"/>
+            <result property="creator" column="creator" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updater" column="updater" jdbcType="VARCHAR"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="deleted" column="deleted" jdbcType="BIT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,label,tree_path,
+        permission,parent_id,path,
+        component,sequence,icon,
+        style,type,status,
+        readonly,global,display,
+        description,creator,create_time,
+        updater,update_time,deleted
+    </sql>
+</mapper>

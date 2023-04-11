@@ -15,12 +15,15 @@ public class JobInfoBaseVO {
      */
     @ApiParam("企业Id")
     private String coId;
+    private String coName;
     /**
      * 用户Id
      */
     @ApiParam("用户Id")
     private String userId;
+    private String userName;
     private String positionId;
+    private String positionName;
     private String jobName;
     private String jobStatus;
 }

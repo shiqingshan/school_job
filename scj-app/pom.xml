@@ -20,7 +20,11 @@
     <dependencies>
         <dependency>
             <groupId>com.sc</groupId>
-            <artifactId>scj-starter-web</artifactId>
+            <artifactId>scj-commom</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sc</groupId>
+            <artifactId>scj-persistence</artifactId>
         </dependency>
     </dependencies>
 

@@ -6,6 +6,5 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class JobApplyPageQueryReqVO extends JobApplyBaseVO{
-    private PageInfoVO pageInfo;
+public class JobApplyPageQueryReqVO extends PageInfoVO {
 }

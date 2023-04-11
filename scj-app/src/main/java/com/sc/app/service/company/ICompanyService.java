@@ -8,6 +8,7 @@ import com.sc.model.entity.company.vo.CompanyPageQueryReqVO;
 import com.sc.model.entity.company.vo.CompanyResVO;
 import com.sc.model.entity.company.vo.CompanyUpdateReqVO;
 
+
 public interface ICompanyService extends IService<CompanyDO> {
     PageResult<CompanyResVO> getPageCompanyList(CompanyPageQueryReqVO companyService);
 

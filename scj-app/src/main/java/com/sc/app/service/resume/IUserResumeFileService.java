@@ -3,7 +3,6 @@ package com.sc.app.service.resume;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.sc.model.entity.resume.UserResumeFileDO;
 import com.sc.model.entity.resume.vo.UserResumeFileCreateReqVO;
-
 import com.sc.model.entity.resume.vo.UserResumeFileResVO;
 import com.sc.model.entity.resume.vo.UserResumeFileUpdateReqVO;
 

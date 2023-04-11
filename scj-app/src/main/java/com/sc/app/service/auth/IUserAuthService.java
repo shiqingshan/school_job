@@ -1,11 +1,11 @@
 package com.sc.app.service.auth;
 
 
+import com.sc.common.core.LoginUserInfo;
 import com.sc.model.entity.auth.vo.*;
-import com.sc.web.security.core.LoginUserInfo;
 
 public interface IUserAuthService {
-    public UserLoginResVO login(UserLoginReqVO adminUserLoginReqVO);
+    public UserLoginResVO login(UserLoginReqVO userLoginReqVO);
 
     UserPermissionInfoResVO getPermissionInfo(Long loginUserId);
 

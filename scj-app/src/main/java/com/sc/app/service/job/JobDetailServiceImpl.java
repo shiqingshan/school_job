@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sc.app.convert.job.JobDetailConvert;
 import com.sc.common.exception.ServiceException;
-import com.sc.common.exception.enums.ErrorCode;
 import com.sc.model.entity.job.JobDetailDO;
 import com.sc.model.entity.job.vo.*;
 import com.sc.persistence.job.JobDetailMapper;
@@ -24,7 +23,7 @@ public class JobDetailServiceImpl extends ServiceImpl<JobDetailMapper, JobDetail
         if(save(jobDetailDO)){
             return JobDetailConvert.INSTANCE.convert(jobDetailDO);
         }
-        throw new ServiceException(ErrorCode.SERVICE_ERROR.getCode(),"添加职位详情失败");
+        throw new ServiceException("添加职位详情失败");
     }
 
     /**
@@ -37,7 +36,7 @@ public class JobDetailServiceImpl extends ServiceImpl<JobDetailMapper, JobDetail
         if(updateById(jobDetailDO)){
             return JobDetailConvert.INSTANCE.convert(jobDetailDO);
         }
-        throw new ServiceException(ErrorCode.SERVICE_ERROR.getCode(),"更新职位详情失败");
+        throw new ServiceException("更新职位详情失败");
     }
 
     /**

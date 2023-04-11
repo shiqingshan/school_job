@@ -1,7 +1,7 @@
 package com.sc.app.convert.auth;
 
+import com.sc.common.core.LoginUserInfo;
 import com.sc.model.entity.auth.vo.UserLoginInfoResVO;
-import com.sc.web.security.core.LoginUserInfo;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

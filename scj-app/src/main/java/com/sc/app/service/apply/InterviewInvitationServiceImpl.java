@@ -4,15 +4,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sc.app.convert.apply.InterviewInvitationConvert;
-import com.sc.common.base.PageInfoVO;
 import com.sc.common.base.PageResult;
 import com.sc.common.exception.ServiceException;
-import com.sc.common.exception.enums.ErrorCode;
-import com.sc.model.entity.apply.InterviewInvitationDO;
-import com.sc.model.entity.apply.vo.InterviewInvitationCreateReqVO;
-import com.sc.model.entity.apply.vo.InterviewInvitationPageQueryReqVO;
-import com.sc.model.entity.apply.vo.InterviewInvitationResVO;
-import com.sc.model.entity.apply.vo.InterviewInvitationUpdateReqVO;
+import com.sc.model.entity.apply.*;
+import com.sc.model.entity.apply.vo.*;
 import com.sc.persistence.apply.InterviewInvitationMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,7 +17,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class InterviewInvitationServiceImpl extends 
-        ServiceImpl<InterviewInvitationMapper, InterviewInvitationDO> 
+        ServiceImpl<InterviewInvitationMapper, InterviewInvitationDO>
         implements IInterviewInvitationService{
     /**
      * @param interviewInvitationPageQueryReqVO
@@ -31,8 +26,7 @@ public class InterviewInvitationServiceImpl extends
     @Override
     public PageResult<InterviewInvitationResVO> getPageInterviewInvitationList(InterviewInvitationPageQueryReqVO interviewInvitationPageQueryReqVO) {
         InterviewInvitationDO interviewInvitationDO = InterviewInvitationConvert.INSTANCE.convert(interviewInvitationPageQueryReqVO);
-        PageInfoVO pageInfo = interviewInvitationPageQueryReqVO.getPageInfo();
-        Page<InterviewInvitationDO> page = new Page<>(pageInfo.getPageNum(), pageInfo.getPageSize());
+        Page<InterviewInvitationDO> page = new Page<>(interviewInvitationPageQueryReqVO.getPageNum(), interviewInvitationPageQueryReqVO.getPageSize());
         Page<InterviewInvitationDO> pageRes = page(page, new QueryWrapper<>(interviewInvitationDO));
         long total = pageRes.getTotal();
         List<InterviewInvitationDO> records = pageRes.getRecords();
@@ -50,7 +44,7 @@ public class InterviewInvitationServiceImpl extends
         if(save(interviewInvitationDO)){
             return InterviewInvitationConvert.INSTANCE.convert(interviewInvitationDO);
         }
-        throw new ServiceException(ErrorCode.SERVICE_ERROR.getCode(),"添加职位申请失败");
+        throw new ServiceException("添加职位申请失败");
     }
 
     /**
@@ -63,6 +57,6 @@ public class InterviewInvitationServiceImpl extends
         if(updateById(interviewInvitationDO)){
             return InterviewInvitationConvert.INSTANCE.convert(interviewInvitationDO);
         }
-        throw new ServiceException(ErrorCode.SERVICE_ERROR.getCode(),"更新职位申请失败");
+        throw new ServiceException("更新职位申请失败");
     }
 }

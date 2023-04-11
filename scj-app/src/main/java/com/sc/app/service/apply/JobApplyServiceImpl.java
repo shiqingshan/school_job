@@ -4,10 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sc.app.convert.apply.JobApplyConvert;
-import com.sc.common.base.PageInfoVO;
 import com.sc.common.base.PageResult;
 import com.sc.common.exception.ServiceException;
-import com.sc.common.exception.enums.ErrorCode;
 import com.sc.model.entity.apply.JobApplyDO;
 import com.sc.model.entity.apply.vo.JobApplyCreateReqVO;
 import com.sc.model.entity.apply.vo.JobApplyPageQueryReqVO;
@@ -29,8 +27,7 @@ public class JobApplyServiceImpl extends ServiceImpl<JobApplyMapper, JobApplyDO>
     @Override
     public PageResult<JobApplyResVO> getPageJobApplyList(JobApplyPageQueryReqVO jobApplyPageQueryReqVO) {
         JobApplyDO jobApplyDO = JobApplyConvert.INSTANCE.convert(jobApplyPageQueryReqVO);
-        PageInfoVO pageInfo = jobApplyPageQueryReqVO.getPageInfo();
-        Page<JobApplyDO> page = new Page<>(pageInfo.getPageNum(), pageInfo.getPageSize());
+        Page<JobApplyDO> page = new Page<>(jobApplyPageQueryReqVO.getPageNum(), jobApplyPageQueryReqVO.getPageSize());
         Page<JobApplyDO> pageRes = page(page, new QueryWrapper<>(jobApplyDO));
         long total = pageRes.getTotal();
         List<JobApplyDO> records = pageRes.getRecords();
@@ -48,7 +45,7 @@ public class JobApplyServiceImpl extends ServiceImpl<JobApplyMapper, JobApplyDO>
         if(save(jobApplyDO)){
             return JobApplyConvert.INSTANCE.convert(jobApplyDO);
         }
-        throw new ServiceException(ErrorCode.SERVICE_ERROR.getCode(),"添加职位申请失败");
+        throw new ServiceException("添加职位申请失败");
     }
 
     /**
@@ -61,6 +58,6 @@ public class JobApplyServiceImpl extends ServiceImpl<JobApplyMapper, JobApplyDO>
         if(updateById(jobApplyDO)){
             return JobApplyConvert.INSTANCE.convert(jobApplyDO);
         }
-        throw new ServiceException(ErrorCode.SERVICE_ERROR.getCode(),"更新职位申请失败");
+        throw new ServiceException("更新职位申请失败");
     }
 }

@@ -4,11 +4,11 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-
 import com.sc.common.base.BaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
 
 /**
  * 招聘岗位信息
@@ -27,12 +27,17 @@ public class JobPositionDO extends BaseDO implements Serializable {
     /**
      * 父级岗位类别ID
      */
-    private Long prentId;
+    private Long parentId;
+
+    private String ancestors;
 
     /**
      * 岗位类型名称
      */
     private String positionName;
+
+    private String status;
+
 
 
     @TableField(exist = false)

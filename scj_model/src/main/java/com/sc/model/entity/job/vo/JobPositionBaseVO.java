@@ -11,5 +11,10 @@ public class JobPositionBaseVO {
     /**
      * 岗位名称
      */
-    private String name;
+    private String positionName;
+
+    /**
+     * 岗位状态
+     */
+    private String status;
 }

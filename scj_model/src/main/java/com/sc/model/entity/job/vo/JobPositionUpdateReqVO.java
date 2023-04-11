@@ -6,4 +6,5 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class JobPositionUpdateReqVO extends JobPositionBaseVO{
+    private String id;
 }

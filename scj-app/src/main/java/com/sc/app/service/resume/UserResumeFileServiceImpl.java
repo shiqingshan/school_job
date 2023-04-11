@@ -3,7 +3,6 @@ package com.sc.app.service.resume;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sc.app.convert.resume.UserResumeFileConvert;
 import com.sc.common.exception.ServiceException;
-import com.sc.common.exception.enums.ErrorCode;
 import com.sc.model.entity.resume.UserResumeFileDO;
 import com.sc.model.entity.resume.vo.UserResumeFileCreateReqVO;
 import com.sc.model.entity.resume.vo.UserResumeFileResVO;
@@ -30,7 +29,7 @@ public class UserResumeFileServiceImpl extends ServiceImpl<UserResumeFileMapper,
         if(save(userResumeFileDO)){
             return UserResumeFileConvert.INSTANCE.convert(userResumeFileDO);
         }
-        throw new ServiceException(ErrorCode.SERVICE_ERROR.getCode(),"添加用户简历文件失败");
+        throw new ServiceException("添加用户简历文件失败");
     }
 
     /**
@@ -43,7 +42,7 @@ public class UserResumeFileServiceImpl extends ServiceImpl<UserResumeFileMapper,
         if(updateById(userResumeFileDO)){
             return UserResumeFileConvert.INSTANCE.convert(userResumeFileDO);
         }
-        throw new ServiceException(ErrorCode.SERVICE_ERROR.getCode(),"修改用户简历文件失败");
+        throw new ServiceException("修改用户简历文件失败");
     }
 }
 

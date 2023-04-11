@@ -1,17 +1,18 @@
 <template>
     <div>
-        <n-layout>
-            <n-layout-header>颐和园路</n-layout-header>
-            <n-layout-content content-style="padding: 24px;">
-                <router-view></router-view>
-            </n-layout-content>
-            <n-layout-footer>成府路</n-layout-footer>
-          </n-layout>
+        <el-container>
+            <LayoutHeader/>
+            <el-main class="text-center h-prose"><router-view></router-view></el-main>
+            <el-footer class="text-center">
+                SCJ
+            </el-footer>
+        </el-container>
     </div>
 </template>
 
-<script setup lang="ts">
 
+<script setup lang="ts">
+import LayoutHeader from './layout-header/index.vue'
 </script>
 
 <style scoped>

@@ -7,8 +7,6 @@ import com.sc.model.entity.resume.vo.UserResumeFileUpdateReqVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-import java.util.List;
-
 @Mapper
 public interface UserResumeFileConvert {
     UserResumeFileConvert INSTANCE = Mappers.getMapper(UserResumeFileConvert.class);
