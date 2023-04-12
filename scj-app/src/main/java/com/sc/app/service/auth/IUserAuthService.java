@@ -12,4 +12,6 @@ public interface IUserAuthService {
     UserMenuInfoResVO getMenuInfo(Long loginUserId);
 
     UserLoginInfoResVO getUserInfo(LoginUserInfo userInfo);
+
+    UserRegisterResVO register(UserRegisterReqVO userRegisterReqVO);
 }

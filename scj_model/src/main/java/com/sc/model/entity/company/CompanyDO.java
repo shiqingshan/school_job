@@ -49,6 +49,11 @@ public class CompanyDO extends BaseDO implements Serializable {
      */
     private String businessLicense;
 
+    /**
+     * 企业状态
+     */
+    private Integer status;
+
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

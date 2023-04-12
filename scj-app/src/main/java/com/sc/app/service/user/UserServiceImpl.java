@@ -1,6 +1,7 @@
 package com.sc.app.service.user;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sc.model.entity.user.UserDO;
 import com.sc.persistence.user.UserMapper;
 import lombok.RequiredArgsConstructor;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements IUserService{
+public class UserServiceImpl extends ServiceImpl<UserMapper,UserDO> implements IUserService{
     private final UserMapper userMapper;
     /**
      * @param username

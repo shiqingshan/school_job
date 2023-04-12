@@ -45,4 +45,10 @@ public class UserAuthController {
     public Result<UserMenuInfoResVO> getMenuInfo(){
         return ResultUtils.success(userAuthService.getMenuInfo(SpringSecurityUtils.getLoginUserId()));
     }
+
+
+    @PostMapping("/register")
+    public Result<UserRegisterResVO> register(@RequestBody UserRegisterReqVO userRegisterReqVO){
+        return ResultUtils.success(userAuthService.register(userRegisterReqVO));
+    }
 }

@@ -17,7 +17,6 @@ import java.io.Serializable;
  */
 @EqualsAndHashCode(callSuper = true)
 @TableName(value ="scj_account")
-@Builder
 @Data
 public class AccountDO extends BaseDO implements Serializable {
     /**
@@ -43,6 +42,12 @@ public class AccountDO extends BaseDO implements Serializable {
      */
     @TableField(value = "profile_picture")
     private byte[] profilePicture;
+
+    /**
+     * 账户状态
+     */
+    @TableField(value = "status")
+    private Integer status;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
