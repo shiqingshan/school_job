@@ -15,7 +15,7 @@
         <module>scj-server</module>
         <module>scj-framework</module>
         <module>scj-mp-generator</module>
-        <module>scj_model</module>
+        <module>scj-model</module>
     </modules>
 
     <properties>
@@ -84,7 +84,7 @@
             </dependency>
             <dependency>
                 <groupId>com.sc</groupId>
-                <artifactId>scj_model</artifactId>
+                <artifactId>scj-model</artifactId>
                 <version>${csj.version}</version>
             </dependency>
             <dependency>

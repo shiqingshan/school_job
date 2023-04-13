@@ -19,7 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>com.sc</groupId>
-            <artifactId>scj_model</artifactId>
+            <artifactId>scj-model</artifactId>
         </dependency>
         <dependency>
             <groupId>com.mysql</groupId>
