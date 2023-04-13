@@ -4,8 +4,10 @@ import com.sc.model.entity.account.AccountDO;
 import com.sc.model.entity.user.UserDO;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class LoginUserInfo {
+public class LoginUserInfo implements Serializable {
     private String token;
     private Long userId;
     private Long accountId;

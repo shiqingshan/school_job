@@ -1,6 +1,6 @@
 package com.sc.app.convert.auth;
 
-import com.sc.common.core.LoginUserInfo;
+import com.sc.model.entity.auth.LoginUserInfo;
 import com.sc.model.entity.auth.vo.UserLoginInfoResVO;
 import com.sc.model.entity.auth.vo.UserRegisterReqVO;
 import com.sc.model.entity.auth.vo.UserRegisterResVO;

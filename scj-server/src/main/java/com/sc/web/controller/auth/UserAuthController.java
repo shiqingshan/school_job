@@ -10,6 +10,8 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping("/user/auth")
 @RequiredArgsConstructor
@@ -24,8 +26,8 @@ public class UserAuthController {
 
     @ApiOperation("获取用户信息")
     @GetMapping("/getUserInfo")
-    public Result<UserLoginInfoResVO> getUserInfo(){
-        return ResultUtils.success(userAuthService.getUserInfo(null));
+    public Result<UserLoginInfoResVO> getUserInfo(HttpServletRequest request){
+        return ResultUtils.success(userAuthService.getUserInfo(request));
     }
 
     /**
@@ -50,5 +52,15 @@ public class UserAuthController {
     @PostMapping("/register")
     public Result<UserRegisterResVO> register(@RequestBody UserRegisterReqVO userRegisterReqVO){
         return ResultUtils.success(userAuthService.register(userRegisterReqVO));
+    }
+
+    /**
+     * 退出登录
+     */
+    @ApiOperation("退出登录")
+    @PostMapping("/logout")
+    public Result logout()
+    {
+        return ResultUtils.success();
     }
 }

@@ -30,13 +30,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class AdminAuthServiceImpl implements IUserAuthService {
+public class UserAuthServiceImpl implements IUserAuthService {
     private final IUserService userService;
     private final IAccountService accountService;
     private final IPermissionService permissionService;
@@ -98,25 +99,19 @@ public class AdminAuthServiceImpl implements IUserAuthService {
 
 
     /**
-     * @param userInfo
      * @return
      */
     @Override
-    public UserLoginInfoResVO getUserInfo(com.sc.common.core.LoginUserInfo userInfo) {
-        userInfo = new com.sc.common.core.LoginUserInfo();
-        userInfo.setUserId(1L);
-        userInfo.setAccountId(1L);
-        userInfo.setRoleType("admin");
-        userInfo.setUserName("admin");
-        checkUserLogin(userInfo);
-        return AuthConverter.INSTANCE.convert(userInfo);
+    public UserLoginInfoResVO getUserInfo(HttpServletRequest request) {
+        LoginUserInfo loginUser = tokenService.getLoginUser(request);
+        return AuthConverter.INSTANCE.convert(loginUser);
     }
 
     //校验token
-    private void checkUserLogin(com.sc.common.core.LoginUserInfo userInfo) {
+    private void checkUserLogin(LoginUserInfo userInfo) {
         if(Objects.isNull(userInfo) || userInfo.getUserId() == null ||
                 userInfo.getAccountId() == null ||
-                StringUtils.isBlank(userInfo.getRoleType())){
+                Objects.isNull(userInfo.getAccountType())){
             log.error(ErrorCode.AUTH_USER_BAD_TOKEN.getMessage());
             throw new ServiceException(ErrorCode.AUTH_USER_BAD_TOKEN);
         }

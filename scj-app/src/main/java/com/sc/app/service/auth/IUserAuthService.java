@@ -1,8 +1,9 @@
 package com.sc.app.service.auth;
 
 
-import com.sc.common.core.LoginUserInfo;
 import com.sc.model.entity.auth.vo.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 public interface IUserAuthService {
     public UserLoginResVO login(UserLoginReqVO userLoginReqVO);
@@ -11,7 +12,7 @@ public interface IUserAuthService {
 
     UserMenuInfoResVO getMenuInfo(Long loginUserId);
 
-    UserLoginInfoResVO getUserInfo(LoginUserInfo userInfo);
+    UserLoginInfoResVO getUserInfo(HttpServletRequest request);
 
     UserRegisterResVO register(UserRegisterReqVO userRegisterReqVO);
 }
