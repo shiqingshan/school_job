@@ -1,7 +1,11 @@
 package com.sc.app.service.account;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.sc.common.base.PageResult;
 import com.sc.model.entity.account.AccountDO;
+import com.sc.model.entity.account.vo.AccountPageQueryReqVO;
+import com.sc.model.entity.account.vo.AccountResVO;
+import com.sc.model.entity.account.vo.AccountUpdateReqVO;
 
 import java.util.List;
 
@@ -15,4 +19,13 @@ public interface IAccountService extends IService<AccountDO> {
      * @return
      */
     List<AccountDO> getAccountByUserId(Long userId);
+
+    /**
+     * 获取账户列表
+     * @param accountPageQueryReqVO
+     * @return
+     */
+    PageResult<AccountResVO> getPageAccountList(AccountPageQueryReqVO accountPageQueryReqVO);
+
+    AccountResVO updateAccount(AccountUpdateReqVO accountUpdateReqVO);
 }

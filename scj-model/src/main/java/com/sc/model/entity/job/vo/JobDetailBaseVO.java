@@ -14,6 +14,8 @@ public class JobDetailBaseVO {
      */
     private Long jobId;
 
+    private String jobName;
+
     /**
      * 职位描述
      */
@@ -33,4 +35,9 @@ public class JobDetailBaseVO {
      * 工作地点
      */
     private String jobAddr;
+
+    /**
+     * 薪资待遇
+     */
+    private String jobSalary;
 }

@@ -1,5 +1,6 @@
 package com.sc.common.exception;
 
+import com.sc.common.exception.enums.ErrorCode;
 import com.sc.common.exception.enums.IErrorCode;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -33,6 +34,7 @@ public final class ServiceException extends RuntimeException {
     }
 
     public ServiceException(String message) {
+        this.code = ErrorCode.ERROR.getCode();
         this.message = message;
     }
 
