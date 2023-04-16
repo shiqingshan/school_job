@@ -5,9 +5,12 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sc.app.convert.user.UserConvert;
 import com.sc.common.base.PageResult;
+import com.sc.common.exception.ServiceException;
 import com.sc.model.entity.user.UserDO;
+import com.sc.model.entity.user.vo.UserCreateReqVO;
 import com.sc.model.entity.user.vo.UserPageQueryReqVO;
 import com.sc.model.entity.user.vo.UserResVO;
+import com.sc.model.entity.user.vo.UserUpdateReqVo;
 import com.sc.persistence.user.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -44,5 +47,35 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,UserDO> implements I
         List<UserDO> records = page.getRecords();
         long total = page.getTotal();
         return new PageResult<>(UserConvert.INSTANCE.convert(records),total);
+    }
+
+    /**
+     * @param userCreateReqVO
+     * @return
+     */
+    @Override
+    public UserResVO addUser(UserCreateReqVO userCreateReqVO) {
+        UserDO userDO = UserConvert.INSTANCE.convert(userCreateReqVO);
+        /**
+         * 用户默认密码
+         */
+        userDO.setUserPwd("1234");
+        if(save(userDO)){
+            return UserConvert.INSTANCE.convert(userDO);
+        }
+        throw new ServiceException("添加用户失败");
+    }
+
+    /**
+     * @param userUpdateReqVo
+     * @return
+     */
+    @Override
+    public UserResVO updateUser(UserUpdateReqVo userUpdateReqVo) {
+        UserDO userDO = UserConvert.INSTANCE.convert(userUpdateReqVo);
+        if(updateById(userDO)){
+            return UserConvert.INSTANCE.convert(userDO);
+        }
+        throw new ServiceException("更新用户失败");
     }
 }

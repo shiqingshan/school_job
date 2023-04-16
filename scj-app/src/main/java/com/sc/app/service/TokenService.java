@@ -3,6 +3,8 @@ package com.sc.app.service;
 import com.sc.common.constant.CacheConstants;
 import com.sc.common.constant.Constants;
 import com.sc.common.core.redis.RedisCache;
+import com.sc.common.exception.ServiceException;
+import com.sc.common.exception.enums.ErrorCode;
 import com.sc.common.utils.ServletUtils;
 import com.sc.common.utils.StringUtils;
 import com.sc.common.utils.ip.AddressUtils;
@@ -16,10 +18,14 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -77,6 +83,34 @@ public class TokenService
         return null;
     }
 
+    public LoginUserInfo getLoginUser()
+    {
+        ServletRequestAttributes servletRequestAttributes =  (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = servletRequestAttributes.getRequest();
+        // 获取请求携带的令牌
+        String token = getToken(request);
+        if (StringUtils.isNotEmpty(token))
+        {
+            try
+            {
+                Claims claims = parseToken(token);
+                // 解析对应的权限以及用户信息
+                String uuid = (String) claims.get(Constants.LOGIN_USER_KEY);
+                String userKey = getTokenKey(uuid);
+                LoginUserInfo loginUserInfo =  redisCache.getCacheObject(userKey);
+                if(Objects.isNull(loginUserInfo)){
+                    throw new ServiceException(ErrorCode.AUTH_ERROR);
+                }
+                return loginUserInfo;
+            }
+            catch (Exception e)
+            {
+            }
+        }
+        throw new ServiceException(ErrorCode.AUTH_ERROR);
+    }
+
+
     /**
      * 设置用户身份信息
      */
@@ -93,6 +127,17 @@ public class TokenService
      */
     public void delLoginUser(String token)
     {
+        if (StringUtils.isNotEmpty(token))
+        {
+            String userKey = getTokenKey(token);
+            redisCache.deleteObject(userKey);
+        }
+    }
+    public void delLoginUser()
+    {
+        ServletRequestAttributes servletRequestAttributes =  (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = servletRequestAttributes.getRequest();
+        String token = getToken(request);
         if (StringUtils.isNotEmpty(token))
         {
             String userKey = getTokenKey(token);

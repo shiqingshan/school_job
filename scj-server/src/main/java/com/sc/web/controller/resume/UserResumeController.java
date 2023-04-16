@@ -46,7 +46,7 @@ public class UserResumeController {
     @ApiOperation("更新用户简历")
     @PostMapping("/update")
     public Result<UserResumeResVO> updateUserResume(@RequestBody UserResumeUpdateReqVO userResumeUpdateReqVO){
-        return ResultUtils.success("更新用户简历成功！",userResumeService.updateUserResume(userResumeUpdateReqVO));
+        return ResultUtils.success("更新用户简历成功！",userResumeService.addOrUpdateUserResume(userResumeUpdateReqVO));
     }
 
     /**
@@ -58,5 +58,14 @@ public class UserResumeController {
     @DeleteMapping("/delete/{id}")
     public Result<Boolean> deleteComPanyById(@PathVariable("id") Long id){
         return ResultUtils.success("删除用户简历成功！",userResumeService.removeById(id));
+    }
+
+    /**
+     * 获取当前用户在线简历
+     */
+    @ApiOperation("获取当前用户在线简历")
+    @GetMapping("/get/online")
+    public Result<UserResumeResVO> getOnlineUserResume(){
+        return ResultUtils.success("获取当前用户在线简历成功！",userResumeService.getOnlineUserResume());
     }
 }

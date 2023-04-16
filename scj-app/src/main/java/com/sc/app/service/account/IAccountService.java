@@ -28,4 +28,6 @@ public interface IAccountService extends IService<AccountDO> {
     PageResult<AccountResVO> getPageAccountList(AccountPageQueryReqVO accountPageQueryReqVO);
 
     AccountResVO updateAccount(AccountUpdateReqVO accountUpdateReqVO);
+
+    AccountResVO getAccountById(String id);
 }

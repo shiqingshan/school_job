@@ -6,6 +6,8 @@ import com.sc.model.entity.resume.vo.UserResumeFileCreateReqVO;
 import com.sc.model.entity.resume.vo.UserResumeFileResVO;
 import com.sc.model.entity.resume.vo.UserResumeFileUpdateReqVO;
 
+import java.util.List;
+
 /**
 * 
 * @description 针对表【scj_user_resume_file(用户简历表文件表)】的数据库操作Service
@@ -15,4 +17,7 @@ public interface IUserResumeFileService extends IService<UserResumeFileDO> {
     UserResumeFileResVO addUserResumeFile(UserResumeFileCreateReqVO userResumeCreateReqVO);
 
     UserResumeFileResVO updateUserResumeFile(UserResumeFileUpdateReqVO userResumeUpdateReqVO);
+
+    List<UserResumeFileResVO> getLoginUserResumeFileList();
+
 }

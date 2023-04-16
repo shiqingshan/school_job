@@ -14,4 +14,8 @@ public interface IJobInfoService extends IService<JobInfoDO> {
     JobInfoResVO addJobInfo(JobInfoCreateReqVO jobInfoCreateReqVO);
 
     JobInfoResVO updateJobInfo(JobInfoUpdateReqVO jobInfoUpdateReqVO);
+
+    PageResult<JobInfoResVO> getPageJobInfoListByUserId(JobInfoPageQueryReqVO jobInfoPageQueryReqVO);
+
+    JobInfoResVO getJobInfo(String id);
 }

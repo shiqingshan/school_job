@@ -2,8 +2,10 @@ package com.sc.app.convert.user;
 
 import com.sc.model.entity.auth.vo.UserRegisterReqVO;
 import com.sc.model.entity.user.UserDO;
+import com.sc.model.entity.user.vo.UserCreateReqVO;
 import com.sc.model.entity.user.vo.UserPageQueryReqVO;
 import com.sc.model.entity.user.vo.UserResVO;
+import com.sc.model.entity.user.vo.UserUpdateReqVo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -21,4 +23,10 @@ public interface UserConvert {
     UserDO convert(UserPageQueryReqVO userPageQueryReqVO);
 
     List<UserResVO> convert(List<UserDO> records);
+
+    UserResVO convert(UserDO byId);
+
+    UserDO convert(UserCreateReqVO userCreateReqVO);
+
+    UserDO convert(UserUpdateReqVo userUpdateReqVo);
 }

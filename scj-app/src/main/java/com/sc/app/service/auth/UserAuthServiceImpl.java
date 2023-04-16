@@ -91,6 +91,9 @@ public class UserAuthServiceImpl implements IUserAuthService {
         userLogonInfo.setAccountId(accountDO.getId());
         userLogonInfo.setUserInfo(userDO);
         userLogonInfo.setAccountInfo(accountDO);
+        userLogonInfo.setAccountType(accountDO.getAccountType());
+        userLogonInfo.setUserName(userDO.getUserName());
+        userLogonInfo.setUserInfo(userDO);
         UserLoginResVO userLoginResVO = new UserLoginResVO();
         String token = tokenService.createToken(userLogonInfo);
         userLoginResVO.setToken(token);
@@ -186,6 +189,10 @@ public class UserAuthServiceImpl implements IUserAuthService {
         CompanyUserDO companyUserDO = new CompanyUserDO();
         companyUserDO.setCoId(companyDO.getId());
         companyUserDO.setUserId(userDO.getId());
+        Long count = companyUserMapper.selectCount(new LambdaQueryWrapper<CompanyUserDO>().eq(CompanyUserDO::getCoId, companyDO.getId()).eq(CompanyUserDO::getUserId, userDO.getId()));
+        if(count>0){
+            throw new ServiceException("您已经有此账号，请登录！");
+        }
         int save = companyUserMapper.insert(companyUserDO);
         if(save<1){
             log.error("公司用户关联创建失败!");
@@ -215,7 +222,7 @@ public class UserAuthServiceImpl implements IUserAuthService {
         accountDO.setStatus(accountStatusEnum.getCode());
         AccountDO account = accountService.getOne(new QueryWrapper<AccountDO>().eq("user_id", userDO.getId()).eq("account_type", accountEnum.getCode()));
         if(Objects.nonNull(account)){
-            throw new ServiceException("账号已存在！");
+            return;
         }
         if(!accountService.save(accountDO)){
             log.error("账号创建失败!");
@@ -238,5 +245,13 @@ public class UserAuthServiceImpl implements IUserAuthService {
         }
         log.error("用户创建失败!");
         throw new ServiceException("用户创建失败！");
+    }
+
+    /**
+     *
+     */
+    @Override
+    public void logout() {
+        tokenService.delLoginUser();
     }
 }

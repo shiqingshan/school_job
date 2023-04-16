@@ -45,7 +45,7 @@ public class JobInfoDO extends BaseDO implements Serializable {
     private String jobName;
 
     /**
-     * 职位状态
+     * 职位状态 0 发布中 1 已下架 2 待审核 3 审核不通过
      */
     private Integer jobStatus;
 

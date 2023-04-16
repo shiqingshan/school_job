@@ -15,4 +15,6 @@ public interface IUserAuthService {
     UserLoginInfoResVO getUserInfo(HttpServletRequest request);
 
     UserRegisterResVO register(UserRegisterReqVO userRegisterReqVO);
+
+    void logout();
 }

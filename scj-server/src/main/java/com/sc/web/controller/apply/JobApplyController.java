@@ -59,4 +59,12 @@ public class JobApplyController {
     public Result<Boolean> deleteComPanyById(@PathVariable("id") Long id){
         return ResultUtils.success("删除职位申请成功！",jobApplyService.removeById(id));
     }
+    /**
+     * 根据用户获取职位申请列表
+     */
+    @ApiOperation("根据用户获取职位申请列表")
+    @GetMapping("/user/list")
+    public Result<PageResult<JobApplyResVO>> getJobApplyListByUserId(JobApplyPageQueryReqVO jobApplyPageQueryReqVO){
+        return ResultUtils.success("根据用户获取职位申请列表成功！",jobApplyService.getJobApplyListByUser(jobApplyPageQueryReqVO));
+    }
 }

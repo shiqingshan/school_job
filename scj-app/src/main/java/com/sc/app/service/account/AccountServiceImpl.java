@@ -21,6 +21,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -79,6 +80,25 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper,AccountDO> imp
             return AccountConvert.INSTANCE.convert(accountDO);
         }
         throw new ServiceException("更新账户失败");
+    }
+
+    /**
+     * @param id
+     * @return
+     */
+    @Override
+    public AccountResVO getAccountById(String id) {
+        AccountDO accountDO = accountMapper.selectById(id);
+        if(accountDO != null){
+            UserDO userDO = userMapper.selectById(accountDO.getUserId());
+            AccountResVO convert = AccountConvert.INSTANCE.convert(accountDO);
+            if(Objects.isNull(userDO)){
+                throw new ServiceException("用户不存在");
+            }
+            convert.setUserName(userDO.getUserName());
+            return convert;
+        }
+        throw new ServiceException("账户不存在");
     }
 }
 

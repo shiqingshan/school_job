@@ -1,14 +1,12 @@
 package com.sc.web.controller.job;
 
 
+import com.sc.app.convert.job.JobPositionConvert;
 import com.sc.app.service.job.IJobInfoService;
 import com.sc.common.base.PageResult;
 import com.sc.common.base.Result;
 import com.sc.common.utils.ResultUtils;
-import com.sc.model.entity.job.vo.JobInfoCreateReqVO;
-import com.sc.model.entity.job.vo.JobInfoPageQueryReqVO;
-import com.sc.model.entity.job.vo.JobInfoResVO;
-import com.sc.model.entity.job.vo.JobInfoUpdateReqVO;
+import com.sc.model.entity.job.vo.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -50,6 +48,12 @@ public class JobInfoController {
         return ResultUtils.success("更新职位信息成功！",jobInfoService.updateJobInfo(jobInfoUpdateReqVO));
     }
 
+    @ApiOperation("获取职位信息")
+    @GetMapping("/{id}")
+    public Result<JobInfoResVO> getJobInfo(@PathVariable(value = "id") String id){
+        return ResultUtils.success("获取岗位分类成功！", jobInfoService.getJobInfo(id));
+    }
+
     /**
      * 删除职位信息
      * @param id
@@ -60,4 +64,13 @@ public class JobInfoController {
     public Result<Boolean> deleteComPanyById(@PathVariable("id") Long id){
         return ResultUtils.success("删除职位信息成功！",jobInfoService.removeById(id));
     }
+    /**
+     * 根据用户获取职位信息
+     */
+    @ApiOperation("根据用户获取职位列表")
+    @GetMapping("/user/page/list")
+    public Result<PageResult<JobInfoResVO>> getPageJobInfoListByUser(JobInfoPageQueryReqVO jobInfoPageQueryReqVO){
+        return ResultUtils.success("获取职位信息分页列表成功！",jobInfoService.getPageJobInfoListByUserId(jobInfoPageQueryReqVO));
+    }
+
 }

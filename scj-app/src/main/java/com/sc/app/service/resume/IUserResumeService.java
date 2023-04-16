@@ -13,5 +13,7 @@ public interface IUserResumeService extends IService<UserResumeDO> {
 
     UserResumeResVO addUserResume(UserResumeCreateReqVO userResumeCreateReqVO);
 
-    UserResumeResVO updateUserResume(UserResumeUpdateReqVO userResumeUpdateReqVO);
+    UserResumeResVO addOrUpdateUserResume(UserResumeUpdateReqVO userResumeUpdateReqVO);
+
+    UserResumeResVO getOnlineUserResume();
 }

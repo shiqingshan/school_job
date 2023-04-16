@@ -23,4 +23,43 @@ public class UserResumeBaseVO {
      * 电子邮箱地址
      */
     private String contactEmail;
+    /**
+     * 性别
+     */
+    private String sex;
+
+    /**
+     * 出生年月
+     */
+    private String birthday;
+
+    /**
+     * 当前求职状态
+     */
+    private String jobStatus;
+
+    /**
+     * 个人优势
+     */
+    private String advantage;
+    /**
+     * 期望薪资
+     */
+    private String expectSalary;
+    /**
+     * 期望工作地点
+     */
+    private String expectAddr;
+    /**
+     * 求职类型
+     */
+    private String jobType;
+    /**
+     * 期望从事职业
+     */
+    private String expectJob;
+    /**
+     * 最高学历
+     */
+    private String education;
 }

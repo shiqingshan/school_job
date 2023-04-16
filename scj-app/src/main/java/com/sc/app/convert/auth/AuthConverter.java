@@ -13,6 +13,7 @@ import org.mapstruct.factory.Mappers;
 public interface AuthConverter {
     AuthConverter INSTANCE = Mappers.getMapper(AuthConverter.class);
 
+    @Mapping( target="accountId",source = "accountInfo.id")
     UserLoginInfoResVO convert(LoginUserInfo userInfo);
 
     @Mapping(target="userName", source="username")

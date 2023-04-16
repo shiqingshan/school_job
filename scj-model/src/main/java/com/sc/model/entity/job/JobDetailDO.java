@@ -48,6 +48,10 @@ public class JobDetailDO extends BaseDO implements Serializable {
      * 工作地点
      */
     private String jobAddr;
+    /**
+     * 薪资
+     */
+    private String jobSalary;
 
 
     @TableField(exist = false)

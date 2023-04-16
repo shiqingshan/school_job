@@ -1,17 +1,18 @@
 package com.sc.web.controller.job;
 
+import com.sc.app.convert.job.JobPositionConvert;
 import com.sc.app.service.job.IJobPositionService;
-import com.sc.common.base.PageResult;
 import com.sc.common.base.Result;
 import com.sc.common.utils.ResultUtils;
-import com.sc.model.entity.job.vo.JobPositionCreateReqVO;
-import com.sc.model.entity.job.vo.JobPositionPageQueryReqVO;
-import com.sc.model.entity.job.vo.JobPositionResVO;
-import com.sc.model.entity.job.vo.JobPositionUpdateReqVO;
+import com.sc.common.utils.StringUtils;
+import com.sc.model.entity.job.vo.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 工作岗位
@@ -23,10 +24,23 @@ import org.springframework.web.bind.annotation.*;
 public class JobPositionController {
     private final IJobPositionService jobPositionService;
 
-    @ApiOperation("获取工作岗位列表(分页)")
-    @GetMapping("/page/list")
-    public Result<PageResult<JobPositionResVO>> getPageJobPositionList(JobPositionPageQueryReqVO jobPositionPageQueryReqVO){
-        return ResultUtils.success("获取工作岗位分页列表成功！",jobPositionService.getPageJobPositionList(jobPositionPageQueryReqVO));
+    @ApiOperation("获取工作岗位列表")
+    @GetMapping("/list")
+    public Result<List<JobPositionResVO>> getJobPositionList(JobPositionQueryReqVO jobPositionQueryReqVO){
+        return ResultUtils.success("获取工作岗位分页列表成功！",jobPositionService.getJobPositionList(jobPositionQueryReqVO));
+    }
+
+    @ApiOperation("获取工作岗位列表")
+    @GetMapping("/list/exclude/{id}")
+    public Result<List<JobPositionResVO>> getJobPositionList(@PathVariable(value = "id", required = false) Long id){
+        List<JobPositionResVO> positionList = jobPositionService.getJobPositionList(new JobPositionQueryReqVO());
+        positionList.removeIf(d -> Long.parseLong(d.getId()) == id || ArrayUtils.contains(StringUtils.split(d.getAncestors(), ","), id + ""));
+        return ResultUtils.success("获取工作岗位分页列表成功！",positionList);
+    }
+    @ApiOperation("获取工作岗位")
+    @GetMapping("/{id}")
+    public Result<JobPositionResVO> getJobPosition(@PathVariable(value = "id") String id){
+        return ResultUtils.success("获取岗位分类成功！", JobPositionConvert.INSTANCE.convert(jobPositionService.getById(id)));
     }
 
     /**
@@ -44,7 +58,7 @@ public class JobPositionController {
      * @return
      */
     @ApiOperation("更新工作岗位")
-    @PostMapping("/update")
+    @PutMapping("/update")
     public Result<JobPositionResVO> updateJobPosition(@RequestBody JobPositionUpdateReqVO jobPositionUpdateReqVO){
         return ResultUtils.success("更新工作岗位成功！",jobPositionService.updateJobPosition(jobPositionUpdateReqVO));
     }

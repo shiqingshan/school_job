@@ -14,4 +14,6 @@ public interface IJobApplyService extends IService<JobApplyDO> {
     JobApplyResVO addJobApply(JobApplyCreateReqVO jobApplyCreateReqVO);
 
     JobApplyResVO updateJobApply(JobApplyUpdateReqVO jobApplyUpdateReqVO);
+
+    PageResult<JobApplyResVO> getJobApplyListByUser(JobApplyPageQueryReqVO jobApplyPageQueryReqVO);
 }

@@ -28,4 +28,6 @@ public class CompanyBaseVO {
      * 企业工商注册号
      */
     private String businessLicense;
+
+    private String status;
 }

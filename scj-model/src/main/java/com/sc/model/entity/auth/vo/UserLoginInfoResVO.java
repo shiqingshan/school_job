@@ -8,6 +8,10 @@ public class UserLoginInfoResVO {
     private String userId;
     /** 用户名 */
     private String userName;
-    /** 用户角色类型 */
-    private String userRole;
+
+    private String accountType;
+
+    private String accountId;
+
+    private String coId;
 }

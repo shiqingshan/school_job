@@ -12,6 +12,8 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * 用户简历文件
  */
@@ -22,6 +24,15 @@ import org.springframework.web.bind.annotation.*;
 public class UserResumeFileController {
     private final IUserResumeFileService userResumeFileService;
 
+
+    /**
+     * 获取登录用户简历文件列表
+     */
+    @ApiOperation("获取用户简历文件列表")
+    @GetMapping("/list")
+    public Result<List<UserResumeFileResVO>> getLoginUserResumeFileList(){
+        return ResultUtils.success("获取用户简历文件列表成功！",userResumeFileService.getLoginUserResumeFileList());
+    }
 
     /**
      * 添加用户简历文件

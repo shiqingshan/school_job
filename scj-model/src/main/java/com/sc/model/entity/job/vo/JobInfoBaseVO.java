@@ -22,7 +22,6 @@ public class JobInfoBaseVO {
     @ApiParam("用户Id")
     private String userId;
     private String userName;
-
     private String contact;
     private String positionId;
     private String positionName;
@@ -32,4 +31,5 @@ public class JobInfoBaseVO {
     private String jobEdu;
     private String jobQualification;
     private String jobStatus;
+    private String jobDescribe;
 }

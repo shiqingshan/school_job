@@ -1,5 +1,6 @@
 package com.sc.web.controller.company;
 
+import com.sc.app.convert.company.CompanyConvert;
 import com.sc.app.service.company.ICompanyService;
 import com.sc.common.base.PageResult;
 import com.sc.common.base.Result;
@@ -12,6 +13,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,6 +29,11 @@ public class CompanyController {
     @GetMapping("/page/list")
     public Result<PageResult<CompanyResVO>> getPageCompanyList(CompanyPageQueryReqVO companyPageQueryReqVO){
         return ResultUtils.success("获取企业分页列表成功！",companyService.getPageCompanyList(companyPageQueryReqVO));
+    }
+
+    @RequestMapping("/{id}")
+    public Result<CompanyResVO> getCompany(@PathVariable(value = "id") String id){
+        return ResultUtils.success("获取企业成功！", CompanyConvert.INSTANCE.convert(companyService.getById(id)));
     }
 
     /**
@@ -57,5 +65,22 @@ public class CompanyController {
     @DeleteMapping("/delete/{id}")
     public Result<Boolean> deleteComPanyById(@PathVariable("id") Long id){
         return ResultUtils.success("删除企业成功！",companyService.removeById(id));
+    }
+
+    /**
+     * 根据用户id获取企业
+     */
+    @ApiOperation("根据用户id获取企业")
+    @GetMapping("/loginUser/page/list")
+    public Result<PageResult<CompanyResVO>> getPageCompanyListByLoginUserId(CompanyPageQueryReqVO companyPageQueryReqVO){
+        return ResultUtils.success("获取企业分页列表成功！",companyService.getPageCompanyListByLoginUserId(companyPageQueryReqVO));
+    }
+    /**
+     * 获取用户企业树
+     */
+    @ApiOperation("获取用户企业树")
+    @GetMapping("/loginUser/treeList")
+    public Result<List<CompanyResVO>> getLoginCompanyTreeList() {
+        return ResultUtils.success("获取用户企业树！", companyService.getLoginCompanyTreeList());
     }
 }
