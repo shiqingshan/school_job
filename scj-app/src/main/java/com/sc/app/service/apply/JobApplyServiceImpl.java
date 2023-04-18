@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sc.app.convert.apply.JobApplyConvert;
 import com.sc.app.service.TokenService;
+import com.sc.app.service.job.JobInfoServiceImpl;
 import com.sc.common.base.PageResult;
 import com.sc.common.exception.ServiceException;
 import com.sc.model.entity.apply.JobApplyDO;
@@ -13,11 +14,10 @@ import com.sc.model.entity.apply.vo.JobApplyPageQueryReqVO;
 import com.sc.model.entity.apply.vo.JobApplyResVO;
 import com.sc.model.entity.apply.vo.JobApplyUpdateReqVO;
 import com.sc.model.entity.auth.LoginUserInfo;
-import com.sc.model.entity.job.JobInfoDO;
+import com.sc.model.entity.job.vo.JobInfoResVO;
 import com.sc.model.enumdict.job.JobApplyStatusEnum;
 import com.sc.model.enumdict.job.JobStatusEnum;
 import com.sc.persistence.apply.JobApplyMapper;
-import com.sc.persistence.job.JobInfoMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +28,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class JobApplyServiceImpl extends ServiceImpl<JobApplyMapper, JobApplyDO> implements IJobApplyService {
     private final TokenService tokenService;
-    private final JobInfoMapper jobInfoMapper;
+    private final JobInfoServiceImpl jobInfoService;
     /**
      * @param jobApplyPageQueryReqVO
      * @return
@@ -54,12 +54,12 @@ public class JobApplyServiceImpl extends ServiceImpl<JobApplyMapper, JobApplyDO>
         LoginUserInfo loginUser = tokenService.getLoginUser();
         jobApplyCreateReqVO.setUserId(String.valueOf(loginUser.getUserId()));
         //获取职位信息
-        JobInfoDO jobInfoDO = jobInfoMapper.selectById(jobApplyCreateReqVO.getJobId());
-        if(jobInfoDO == null){
+        JobInfoResVO jobInfo = jobInfoService.getJobInfo(jobApplyCreateReqVO.getJobId());
+        if(jobInfo == null){
             throw new ServiceException("职位不存在");
         }
         //判断职位信息是否是发布中
-        if(!JobStatusEnum.PUBLISHING.getCode().equals(jobInfoDO.getJobStatus()) ){
+        if(!JobStatusEnum.PUBLISHING.getCode().equals(Integer.parseInt(jobInfo.getJobStatus())) ){
             throw new ServiceException("职位不是发布中状态");
         }
         //判断是否已经申请过该职位
@@ -102,6 +102,16 @@ public class JobApplyServiceImpl extends ServiceImpl<JobApplyMapper, JobApplyDO>
         long total = pageRes.getTotal();
         List<JobApplyDO> records = pageRes.getRecords();
         List<JobApplyResVO> jobApplyResVOList =  JobApplyConvert.INSTANCE.convert(records);
+        //获取职位信息
+        addJobInfo(jobApplyResVOList);
         return new PageResult<>(jobApplyResVOList,total);
+    }
+
+    private void addJobInfo(List<JobApplyResVO> jobApplyResVOList) {
+        jobApplyResVOList.forEach(jobApplyResVO -> {
+            JobInfoResVO jobInfo = jobInfoService.getJobInfo(jobApplyResVO.getJobId());
+            jobApplyResVO.setJobInfo(jobInfo);
+        });
+
     }
 }

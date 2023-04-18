@@ -1,17 +1,18 @@
 package com.sc.web.controller.resume;
 
 import com.sc.app.service.resume.IUserResumeFileService;
-import com.sc.common.base.PageResult;
 import com.sc.common.base.Result;
+import com.sc.common.exception.ServiceException;
 import com.sc.common.utils.ResultUtils;
-import com.sc.model.entity.resume.vo.UserResumeFileCreateReqVO;
 import com.sc.model.entity.resume.vo.UserResumeFileResVO;
 import com.sc.model.entity.resume.vo.UserResumeFileUpdateReqVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -39,8 +40,8 @@ public class UserResumeFileController {
      */
     @ApiOperation("添加用户简历文件")
     @PostMapping("/add")
-    public Result<UserResumeFileResVO> addUserResumeFile(@RequestBody UserResumeFileCreateReqVO userResumeFileCreateReqVO){
-        return ResultUtils.success("添加用户简历文件成功！",userResumeFileService.addUserResumeFile(userResumeFileCreateReqVO));
+    public Result<UserResumeFileResVO> addUserResumeFile(@RequestParam("file") MultipartFile multipartFile){
+        return ResultUtils.success("添加用户简历文件成功！",userResumeFileService.addUserResumeFile(multipartFile));
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.sc.model.entity.apply.vo;
 
+import com.sc.model.entity.job.vo.JobInfoResVO;
 import lombok.Data;
 
 import java.util.Date;
@@ -15,6 +16,8 @@ public class JobApplyBaseVO {
      * 招聘信息ID
      */
     private String jobId;
+
+    private JobInfoResVO jobInfo;
 
     /**
      * 应聘日期

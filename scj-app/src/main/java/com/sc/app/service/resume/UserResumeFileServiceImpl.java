@@ -7,13 +7,15 @@ import com.sc.app.service.TokenService;
 import com.sc.common.exception.ServiceException;
 import com.sc.model.entity.auth.LoginUserInfo;
 import com.sc.model.entity.resume.UserResumeFileDO;
-import com.sc.model.entity.resume.vo.UserResumeFileCreateReqVO;
 import com.sc.model.entity.resume.vo.UserResumeFileResVO;
 import com.sc.model.entity.resume.vo.UserResumeFileUpdateReqVO;
 import com.sc.persistence.resume.UserResumeFileMapper;
+
 import java.util.Collections;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -28,12 +30,18 @@ public class UserResumeFileServiceImpl extends ServiceImpl<UserResumeFileMapper,
     implements IUserResumeFileService {
     private final TokenService tokenService;
     /**
-     * @param userResumeCreateReqVO
-     * @return
+     * @param multipartFile@return
      */
+    @SneakyThrows
     @Override
-    public UserResumeFileResVO addUserResumeFile(UserResumeFileCreateReqVO userResumeCreateReqVO) {
-        UserResumeFileDO userResumeFileDO = UserResumeFileConvert.INSTANCE.convert(userResumeCreateReqVO);
+    public UserResumeFileResVO addUserResumeFile(MultipartFile multipartFile) {
+        LoginUserInfo loginUser = tokenService.getLoginUser();
+
+        UserResumeFileDO userResumeFileDO = new UserResumeFileDO();
+        userResumeFileDO.setUserId(loginUser.getUserId());
+        userResumeFileDO.setResumeFile(multipartFile.getBytes());
+        userResumeFileDO.setFileName(multipartFile.getOriginalFilename());
+        userResumeFileDO.setFileType(multipartFile.getContentType());
         if(save(userResumeFileDO)){
             return UserResumeFileConvert.INSTANCE.convert(userResumeFileDO);
         }

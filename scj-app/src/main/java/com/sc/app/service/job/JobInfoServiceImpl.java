@@ -162,6 +162,7 @@ public class JobInfoServiceImpl extends ServiceImpl<JobInfoMapper, JobInfoDO> im
             CompanyDO companyDO = companyMapper.selectOne(Wrappers.lambdaQuery(CompanyDO.class).eq(CompanyDO::getId, jobInfoDO.getCoId()));
             //获取职位详情
             JobDetailDO jobDetailDO = jobDetailMapper.selectOne(Wrappers.lambdaQuery(JobDetailDO.class).eq(JobDetailDO::getJobId, id));
+
             if(jobDetailDO!=null){
                 JobInfoResVO jobInfoResVO = JobInfoConvert.INSTANCE.convert(jobInfoDO, jobDetailDO);
                 jobInfoResVO.setCoName(companyDO.getName());

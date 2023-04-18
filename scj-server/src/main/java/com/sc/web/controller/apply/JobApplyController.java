@@ -63,7 +63,7 @@ public class JobApplyController {
      * 根据用户获取职位申请列表
      */
     @ApiOperation("根据用户获取职位申请列表")
-    @GetMapping("/user/list")
+    @GetMapping("/user/page/list")
     public Result<PageResult<JobApplyResVO>> getJobApplyListByUserId(JobApplyPageQueryReqVO jobApplyPageQueryReqVO){
         return ResultUtils.success("根据用户获取职位申请列表成功！",jobApplyService.getJobApplyListByUser(jobApplyPageQueryReqVO));
     }

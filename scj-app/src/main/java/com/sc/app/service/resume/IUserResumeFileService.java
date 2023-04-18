@@ -2,10 +2,11 @@ package com.sc.app.service.resume;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.sc.model.entity.resume.UserResumeFileDO;
-import com.sc.model.entity.resume.vo.UserResumeFileCreateReqVO;
 import com.sc.model.entity.resume.vo.UserResumeFileResVO;
 import com.sc.model.entity.resume.vo.UserResumeFileUpdateReqVO;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ import java.util.List;
 * @createDate 2023-04-02 13:06:55
 */
 public interface IUserResumeFileService extends IService<UserResumeFileDO> {
-    UserResumeFileResVO addUserResumeFile(UserResumeFileCreateReqVO userResumeCreateReqVO);
+    UserResumeFileResVO addUserResumeFile(MultipartFile multipartFile);
 
     UserResumeFileResVO updateUserResumeFile(UserResumeFileUpdateReqVO userResumeUpdateReqVO);
 
