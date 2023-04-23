@@ -1,5 +1,6 @@
 package com.sc.model.entity.apply.vo;
 
+import com.sc.model.entity.user.vo.UserResVO;
 import lombok.Data;
 
 import java.util.Date;
@@ -10,6 +11,7 @@ public class InterviewInvitationBaseVO {
      * 应聘用户ID
      */
     private String userId;
+    private UserResVO userInfo;
 
     /**
      * 面试公司
@@ -20,6 +22,8 @@ public class InterviewInvitationBaseVO {
      * 应聘信息ID
      */
     private String applyId;
+
+    private JobApplyResVO jobApplyInfo;
 
     /**
      * 邀请日期
@@ -39,5 +43,5 @@ public class InterviewInvitationBaseVO {
     /**
      * 邀请状态（待处理 、已接受、已拒绝）
      */
-    private Integer status;
+    private String status;
 }

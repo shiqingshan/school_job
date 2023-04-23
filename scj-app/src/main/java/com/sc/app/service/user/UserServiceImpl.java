@@ -78,4 +78,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,UserDO> implements I
         }
         throw new ServiceException("更新用户失败");
     }
+
+    /**
+     * @param userId
+     * @return
+     */
+    @Override
+    public UserResVO getUserInfo(String userId) {
+        UserDO userDO = getById(userId);
+        if(userDO!=null){
+            return UserConvert.INSTANCE.convert(userDO);
+        }
+        return null;
+    }
 }

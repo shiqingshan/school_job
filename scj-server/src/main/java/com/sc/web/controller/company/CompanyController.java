@@ -83,4 +83,12 @@ public class CompanyController {
     public Result<List<CompanyResVO>> getLoginCompanyTreeList() {
         return ResultUtils.success("获取用户企业树！", companyService.getLoginCompanyTreeList());
     }
+    /**
+     * 获取热门企业
+     */
+    @ApiOperation("获取热门企业")
+    @GetMapping("/hot/list")
+    public Result<List<CompanyResVO>> getHotCompanyList(CompanyPageQueryReqVO companyPageQueryReqVO) {
+        return ResultUtils.success("获取热门企业！", companyService.getHotCompanyList(companyPageQueryReqVO));
+    }
 }

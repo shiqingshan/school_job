@@ -11,4 +11,10 @@ public interface IInterviewInvitationService extends IService<InterviewInvitatio
     InterviewInvitationResVO addInterviewInvitation(InterviewInvitationCreateReqVO interviewInvitationCreateReqVO);
 
     InterviewInvitationResVO updateInterviewInvitation(InterviewInvitationUpdateReqVO interviewInvitationUpdateReqVO);
+
+    PageResult<InterviewInvitationResVO> getInterviewInvitationListByCompany(InterviewInvitationPageQueryReqVO interviewInvitationPageQueryReqVO);
+
+    InterviewInvitationResVO getInterviewInvitationById(String id);
+
+    PageResult<InterviewInvitationResVO> getInterviewInvitationListByUser(InterviewInvitationPageQueryReqVO interviewInvitationPageQueryReqVO);
 }

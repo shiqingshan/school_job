@@ -101,4 +101,16 @@ public class CompanyServiceImpl extends ServiceImpl<CompanyMapper, CompanyDO> im
         List<CompanyDO> companyDOS = listByIds(companyIds);
         return CompanyConvert.INSTANCE.convert(companyDOS);
     }
+
+    /**
+     * @param companyPageQueryReqVO
+     * @return
+     */
+    @Override
+    public List<CompanyResVO> getHotCompanyList(CompanyPageQueryReqVO companyPageQueryReqVO) {
+        Page<CompanyDO> pageParam = new Page<>(companyPageQueryReqVO.getPageNum(),companyPageQueryReqVO.getPageSize());
+        Page<CompanyDO> pageRes = page(pageParam, new QueryWrapper<CompanyDO>().orderByDesc("create_time"));
+        List<CompanyDO> records = pageRes.getRecords();
+        return CompanyConvert.INSTANCE.convert(records);
+    }
 }

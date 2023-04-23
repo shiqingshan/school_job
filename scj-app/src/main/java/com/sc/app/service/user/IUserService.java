@@ -21,4 +21,6 @@ public interface IUserService extends IService<UserDO> {
     UserResVO addUser(UserCreateReqVO userCreateReqVO);
 
     UserResVO updateUser(UserUpdateReqVo userUpdateReqVo);
+
+    UserResVO getUserInfo(String userId);
 }

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Api(tags = "面试邀请")
 @RequiredArgsConstructor
-@RequestMapping("/job/interview/invitation")
+@RequestMapping("/job/interview")
 @RestController
 public class InterviewInvitationController {
     private final IInterviewInvitationService interviewInvitationService;
@@ -58,5 +58,32 @@ public class InterviewInvitationController {
     @DeleteMapping("/delete/{id}")
     public Result<Boolean> deleteComPanyById(@PathVariable("id") Long id){
         return ResultUtils.success("删除面试邀请成功！",interviewInvitationService.removeById(id));
+    }
+
+    /**
+     * 获取当前用户企业下的面试邀请列表
+     */
+    @ApiOperation("获取当前用户企业下的面试邀请列表")
+    @GetMapping("/company/page/list")
+    public Result<PageResult<InterviewInvitationResVO>> getInterviewInvitationListByCompany(InterviewInvitationPageQueryReqVO interviewInvitationPageQueryReqVO){
+        return ResultUtils.success("获取当前用户企业下的面试邀请列表成功！",interviewInvitationService.getInterviewInvitationListByCompany(interviewInvitationPageQueryReqVO));
+    }
+
+    /**
+     * 根据Id 获取面试邀请详情
+     */
+    @ApiOperation("根据Id 获取面试邀请详情")
+    @GetMapping("/get/{id}")
+    public Result<InterviewInvitationResVO> getInterviewInvitationById(@PathVariable("id") String id){
+        return ResultUtils.success("根据Id 获取面试邀请详情成功！",interviewInvitationService.getInterviewInvitationById(id));
+    }
+
+    /**
+     * 获取当前用户的面试邀请列表
+     */
+    @ApiOperation("获取当前用户的面试邀请列表")
+    @GetMapping("/user/page/list")
+    public Result<PageResult<InterviewInvitationResVO>> getInterviewInvitationListByUser(InterviewInvitationPageQueryReqVO interviewInvitationPageQueryReqVO){
+        return ResultUtils.success("获取当前用户的面试邀请列表成功！",interviewInvitationService.getInterviewInvitationListByUser(interviewInvitationPageQueryReqVO));
     }
 }

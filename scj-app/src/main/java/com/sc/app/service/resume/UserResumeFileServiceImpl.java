@@ -5,8 +5,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sc.app.convert.resume.UserResumeFileConvert;
 import com.sc.app.service.TokenService;
 import com.sc.common.exception.ServiceException;
+import com.sc.common.utils.file.FileTypeUtils;
 import com.sc.model.entity.auth.LoginUserInfo;
 import com.sc.model.entity.resume.UserResumeFileDO;
+import com.sc.model.entity.resume.vo.UserResumeFileDownloadVO;
 import com.sc.model.entity.resume.vo.UserResumeFileResVO;
 import com.sc.model.entity.resume.vo.UserResumeFileUpdateReqVO;
 import com.sc.persistence.resume.UserResumeFileMapper;
@@ -41,7 +43,7 @@ public class UserResumeFileServiceImpl extends ServiceImpl<UserResumeFileMapper,
         userResumeFileDO.setUserId(loginUser.getUserId());
         userResumeFileDO.setResumeFile(multipartFile.getBytes());
         userResumeFileDO.setFileName(multipartFile.getOriginalFilename());
-        userResumeFileDO.setFileType(multipartFile.getContentType());
+        userResumeFileDO.setFileType(FileTypeUtils.getFileType(multipartFile.getOriginalFilename()));
         if(save(userResumeFileDO)){
             return UserResumeFileConvert.INSTANCE.convert(userResumeFileDO);
         }
@@ -72,6 +74,28 @@ public class UserResumeFileServiceImpl extends ServiceImpl<UserResumeFileMapper,
             return UserResumeFileConvert.INSTANCE.convert(userResumeFileDOList);
         }
         return Collections.emptyList();
+    }
+
+    /**
+     * 下载用户简历文件
+     * @param id
+     */
+    @Override
+    public UserResumeFileDownloadVO downloadUserResumeFile(String id) {
+        UserResumeFileDO userResumeFileDO = getById(id);
+        if(userResumeFileDO != null){
+            return UserResumeFileConvert.INSTANCE.convertByte(userResumeFileDO);
+        }
+        return null;
+    }
+
+    /**
+     * @param resumeFileId
+     * @return
+     */
+    @Override
+    public UserResumeFileResVO getUserResumeFile(String resumeFileId) {
+        return UserResumeFileConvert.INSTANCE.convert(getById(resumeFileId));
     }
 }
 

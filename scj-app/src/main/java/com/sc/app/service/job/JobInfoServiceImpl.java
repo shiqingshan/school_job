@@ -171,4 +171,23 @@ public class JobInfoServiceImpl extends ServiceImpl<JobInfoMapper, JobInfoDO> im
         }
         return null;
     }
+
+    /**
+     * @param jobInfoPageQueryReqVO
+     * @return
+     */
+    @Override
+    public List<JobInfoResVO> getHotJobInfoList(JobInfoPageQueryReqVO jobInfoPageQueryReqVO) {
+        Page<JobInfoDO> page = new Page<>(jobInfoPageQueryReqVO.getPageNum(), jobInfoPageQueryReqVO.getPageSize());
+        Page<JobInfoDO> pageRes = page(page, new LambdaQueryWrapper<>(JobInfoDO.class).orderByDesc(JobInfoDO::getCreateTime));
+        List<JobInfoDO> records = pageRes.getRecords();
+        List<JobInfoResVO> jobInfoResVOList =  JobInfoConvert.INSTANCE.convert(records);
+        if(!jobInfoResVOList.isEmpty()){
+            addUserName(jobInfoResVOList);
+            addCoName(jobInfoResVOList);
+            addJobPositionName(jobInfoResVOList);
+            addJobDetail(jobInfoResVOList);
+        }
+        return jobInfoResVOList;
+    }
 }

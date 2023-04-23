@@ -67,4 +67,22 @@ public class JobApplyController {
     public Result<PageResult<JobApplyResVO>> getJobApplyListByUserId(JobApplyPageQueryReqVO jobApplyPageQueryReqVO){
         return ResultUtils.success("根据用户获取职位申请列表成功！",jobApplyService.getJobApplyListByUser(jobApplyPageQueryReqVO));
     }
+
+    /**
+     * 根据企业用户获取职位申请列表
+     */
+    @ApiOperation("根据企业用户获取职位申请列表")
+    @GetMapping("/company/page/list")
+    public Result<PageResult<JobApplyResVO>> getJobApplyListByCompany(JobApplyPageQueryReqVO jobApplyPageQueryReqVO){
+        return ResultUtils.success("根据企业用户获取职位申请列表成功！",jobApplyService.getJobApplyListByCompany(jobApplyPageQueryReqVO));
+    }
+
+    /**
+     * 根据申请Id获取职位申请
+     */
+    @ApiOperation("根据申请Id获取职位申请")
+    @GetMapping("/get/{id}")
+    public Result<JobApplyResVO> getJobApplyById(@PathVariable(value = "id") String id){
+        return ResultUtils.success("获取职位申请成功！",jobApplyService.getJobApplyById(id));
+    }
 }

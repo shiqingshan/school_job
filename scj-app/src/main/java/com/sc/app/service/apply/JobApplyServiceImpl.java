@@ -5,7 +5,10 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sc.app.convert.apply.JobApplyConvert;
 import com.sc.app.service.TokenService;
-import com.sc.app.service.job.JobInfoServiceImpl;
+import com.sc.app.service.company.ICompanyService;
+import com.sc.app.service.job.IJobInfoService;
+import com.sc.app.service.resume.IUserResumeFileService;
+import com.sc.app.service.user.IUserService;
 import com.sc.common.base.PageResult;
 import com.sc.common.exception.ServiceException;
 import com.sc.model.entity.apply.JobApplyDO;
@@ -14,21 +17,30 @@ import com.sc.model.entity.apply.vo.JobApplyPageQueryReqVO;
 import com.sc.model.entity.apply.vo.JobApplyResVO;
 import com.sc.model.entity.apply.vo.JobApplyUpdateReqVO;
 import com.sc.model.entity.auth.LoginUserInfo;
+import com.sc.model.entity.company.vo.CompanyResVO;
 import com.sc.model.entity.job.vo.JobInfoResVO;
+import com.sc.model.entity.resume.vo.UserResumeFileResVO;
+import com.sc.model.entity.user.vo.UserResVO;
 import com.sc.model.enumdict.job.JobApplyStatusEnum;
 import com.sc.model.enumdict.job.JobStatusEnum;
 import com.sc.persistence.apply.JobApplyMapper;
+import com.sc.persistence.job.JobInfoMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class JobApplyServiceImpl extends ServiceImpl<JobApplyMapper, JobApplyDO> implements IJobApplyService {
     private final TokenService tokenService;
-    private final JobInfoServiceImpl jobInfoService;
+    private final IJobInfoService jobInfoService;
+    private final IUserService userService;
+    private final ICompanyService companyService;
+    private final JobApplyMapper jobApplyMapper;
+    private final IUserResumeFileService userResumeFileService;
     /**
      * @param jobApplyPageQueryReqVO
      * @return
@@ -41,6 +53,8 @@ public class JobApplyServiceImpl extends ServiceImpl<JobApplyMapper, JobApplyDO>
         long total = pageRes.getTotal();
         List<JobApplyDO> records = pageRes.getRecords();
         List<JobApplyResVO> jobApplyResVOList =  JobApplyConvert.INSTANCE.convert(records);
+        //获取职位信息
+        addJobInfo(jobApplyResVOList);
         return new PageResult<>(jobApplyResVOList,total);
     }
 
@@ -108,10 +122,47 @@ public class JobApplyServiceImpl extends ServiceImpl<JobApplyMapper, JobApplyDO>
     }
 
     private void addJobInfo(List<JobApplyResVO> jobApplyResVOList) {
-        jobApplyResVOList.forEach(jobApplyResVO -> {
-            JobInfoResVO jobInfo = jobInfoService.getJobInfo(jobApplyResVO.getJobId());
-            jobApplyResVO.setJobInfo(jobInfo);
-        });
+        jobApplyResVOList.forEach(this::addJobInfo);
 
+    }
+
+    private void addJobInfo(JobApplyResVO jobApplyResVO) {
+        JobInfoResVO jobInfo = jobInfoService.getJobInfo(jobApplyResVO.getJobId());
+        jobApplyResVO.setJobInfo(jobInfo);
+        UserResVO userInfo = userService.getUserInfo(jobApplyResVO.getUserId());
+        jobApplyResVO.setUserInfo(userInfo);
+        UserResumeFileResVO userResumeFileResVO = userResumeFileService.getUserResumeFile(jobApplyResVO.getResumeFileId());
+        jobApplyResVO.setResumeFileInfo(userResumeFileResVO);
+    }
+
+    /**
+     * @param id
+     * @return
+     */
+    @Override
+    public JobApplyResVO getJobApplyById(String id) {
+        JobApplyDO jobApplyDO = getById(id);
+        if(jobApplyDO != null){
+            JobApplyResVO jobApplyResVO = JobApplyConvert.INSTANCE.convert(jobApplyDO);
+            addJobInfo(jobApplyResVO);
+            return jobApplyResVO;
+        }
+        return null;
+    }
+
+    /**
+     * @param jobApplyPageQueryReqVO
+     * @return
+     */
+    @Override
+    public PageResult<JobApplyResVO> getJobApplyListByCompany(JobApplyPageQueryReqVO jobApplyPageQueryReqVO) {
+        List<CompanyResVO> loginCompanyTreeList = companyService.getLoginCompanyTreeList();
+        Page<JobApplyDO> page = new Page<>(jobApplyPageQueryReqVO.getPageNum(), jobApplyPageQueryReqVO.getPageSize());
+        Page<JobApplyDO> pageRes = jobApplyMapper.selectPageByCoId(page,loginCompanyTreeList.stream().map(CompanyResVO::getId).collect(Collectors.toList()));
+        long total = pageRes.getTotal();
+        List<JobApplyDO> records = pageRes.getRecords();
+        List<JobApplyResVO> jobApplyResVOList =  JobApplyConvert.INSTANCE.convert(records);
+        addJobInfo(jobApplyResVOList);
+        return new PageResult<>(jobApplyResVOList,total);
     }
 }

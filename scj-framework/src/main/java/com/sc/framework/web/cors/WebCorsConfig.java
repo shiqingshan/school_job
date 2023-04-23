@@ -24,8 +24,8 @@ public class WebCorsConfig implements WebMvcConfigurer {
         config.addAllowedMethod("*");
         // 允许的原始请求头部信息
         config.addAllowedHeader("*");
-        // 暴露的头部信息
-        config.addExposedHeader("*");
+        // 有效期 1800秒
+        config.setMaxAge(1800L);
         // 2.添加地址映射
         UrlBasedCorsConfigurationSource corsConfigurationSource = new UrlBasedCorsConfigurationSource();
         corsConfigurationSource.registerCorsConfiguration("/**", config);

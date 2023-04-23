@@ -3,6 +3,23 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sc.persistence.apply.JobApplyMapper">
-
-
+    <resultMap id="BaseMap" type="com.sc.model.entity.apply.JobApplyDO">
+        <id property="id" column="id"/>
+        <result property="jobId" column="job_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="applyDate" column="apply_date"/>
+        <result property="status" column="status"/>
+        <result property="resumeId" column="resume_id"/>
+        <result property="resumeFileId" column="resume_file_id"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+    <select id="selectPageByCoId" resultMap="BaseMap">
+        select * from scj_job_apply sja ,scj_job_info sji ,scj_company sc
+        where sja.job_id = sji.id and sji.co_id= sc.id
+          and sc.id in
+            <foreach collection="coIds" item="coId" open="(" separator="," close=")">
+                #{coId}
+            </foreach>
+    </select>
 </mapper>

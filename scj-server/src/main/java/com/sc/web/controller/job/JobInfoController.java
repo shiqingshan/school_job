@@ -12,6 +12,8 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * 职位信息
  */
@@ -71,6 +73,15 @@ public class JobInfoController {
     @GetMapping("/user/page/list")
     public Result<PageResult<JobInfoResVO>> getPageJobInfoListByUser(JobInfoPageQueryReqVO jobInfoPageQueryReqVO){
         return ResultUtils.success("获取职位信息分页列表成功！",jobInfoService.getPageJobInfoListByUserId(jobInfoPageQueryReqVO));
+    }
+
+    /**
+     * 获取热门职位信息
+     */
+    @ApiOperation("获取热门职位信息")
+    @GetMapping("/hot/list")
+    public Result<List<JobInfoResVO>> getHotJobInfoList(JobInfoPageQueryReqVO jobInfoPageQueryReqVO){
+        return ResultUtils.success("获取热门职位信息分页列表成功！",jobInfoService.getHotJobInfoList(jobInfoPageQueryReqVO));
     }
 
 }

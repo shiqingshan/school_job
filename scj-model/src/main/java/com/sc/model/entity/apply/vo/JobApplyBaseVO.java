@@ -1,6 +1,8 @@
 package com.sc.model.entity.apply.vo;
 
 import com.sc.model.entity.job.vo.JobInfoResVO;
+import com.sc.model.entity.resume.vo.UserResumeFileResVO;
+import com.sc.model.entity.user.vo.UserResVO;
 import lombok.Data;
 
 import java.util.Date;
@@ -11,6 +13,8 @@ public class JobApplyBaseVO {
      * 应聘用户ID
      */
     private String userId;
+
+    private UserResVO userInfo;
 
     /**
      * 招聘信息ID
@@ -27,7 +31,7 @@ public class JobApplyBaseVO {
     /**
      * 应聘状态
      */
-    private Integer status;
+    private String status;
 
     /**
      * 简历ID
@@ -38,4 +42,6 @@ public class JobApplyBaseVO {
      * 简历文件ID
      */
     private String resumeFileId;
+
+    private UserResumeFileResVO resumeFileInfo;
 }

@@ -2,6 +2,7 @@ package com.sc.app.convert.resume;
 
 import com.sc.model.entity.resume.UserResumeFileDO;
 import com.sc.model.entity.resume.vo.UserResumeFileCreateReqVO;
+import com.sc.model.entity.resume.vo.UserResumeFileDownloadVO;
 import com.sc.model.entity.resume.vo.UserResumeFileResVO;
 import com.sc.model.entity.resume.vo.UserResumeFileUpdateReqVO;
 import org.mapstruct.Mapper;
@@ -20,4 +21,6 @@ public interface UserResumeFileConvert {
     UserResumeFileDO convert(UserResumeFileUpdateReqVO userResumeFileUpdateReqVO);
 
     List<UserResumeFileResVO> convert(List<UserResumeFileDO> userResumeFileDOList);
+
+    UserResumeFileDownloadVO convertByte(UserResumeFileDO userResumeFileDO);
 }

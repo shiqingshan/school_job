@@ -22,4 +22,5 @@ public interface ICompanyService extends IService<CompanyDO> {
 
     List<CompanyResVO> getLoginCompanyTreeList();
 
+    List<CompanyResVO> getHotCompanyList(CompanyPageQueryReqVO companyPageQueryReqVO);
 }
