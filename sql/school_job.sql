@@ -213,7 +213,7 @@ drop table if exists scj_user_resume_file;
 CREATE TABLE scj_user_resume_file(
   id bigint NOT NULL AUTO_INCREMENT COMMENT '用户简历文件ID',
   user_id bigint NOT NULL COMMENT '用户ID',
-  resume_file blob COMMENT '简历文件',
+  resume_file longblob COMMENT '简历文件',
   file_name varchar(100) COMMENT '文件名称',
   file_type varchar(10) COMMENT '文件类型',
   creator varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '创建者',
@@ -231,7 +231,7 @@ CREATE TABLE scj_job_apply(
   user_id bigint not null COMMENT '应聘用户ID',
   job_id bigint not null COMMENT '招聘信息ID',
   apply_date datetime not null COMMENT '应聘日期',
-  status tinyint(2) NOT NULL COMMENT '应聘状态（待处理、已查看、已面试、已录用、未录用）',
+  status tinyint(2) NOT NULL COMMENT '应聘状态（待处理、已查看、已邀约、已面试、已录用、未录用）',
   resume_id bigint NOT NULL COMMENT '简历ID',
   resume_file_id bigint NOT NULL COMMENT '简历文件ID',
   creator varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '创建者',
