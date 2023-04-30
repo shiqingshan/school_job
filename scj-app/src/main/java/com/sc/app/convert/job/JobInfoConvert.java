@@ -30,7 +30,4 @@ public interface JobInfoConvert {
     @Mapping(target = "id", source = "jobInfoDO.id")
     @Mapping(target = "createTime", source = "jobInfoDO.createTime")
     JobInfoResVO convert(JobInfoDO jobInfoDO, JobDetailDO jobDetailDO);
-
-    @Mapping(target = "id",source = "jobDetailDO.id",ignore = true)
-    void merge(@MappingTarget JobInfoResVO jobInfoResVO, JobDetailDO jobDetailDO);
 }

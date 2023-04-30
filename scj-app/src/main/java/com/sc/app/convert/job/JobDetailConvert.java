@@ -23,4 +23,6 @@ public interface JobDetailConvert {
     JobDetailDO convert(JobDetailUpdateReqVO jobPositionUpdateReqVO);
 
     JobDetailDO convert(JobInfoCreateReqVO jobInfoCreateReqVO);
+
+    JobDetailDO convert(JobDetailResVO jobDetail);
 }

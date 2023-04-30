@@ -22,4 +22,6 @@ public interface IJobInfoService extends IService<JobInfoDO> {
     JobInfoResVO getJobInfo(String id);
 
     List<JobInfoResVO> getHotJobInfoList(JobInfoPageQueryReqVO jobInfoPageQueryReqVO);
+
+    Boolean deleteJobInfoById(Long id);
 }

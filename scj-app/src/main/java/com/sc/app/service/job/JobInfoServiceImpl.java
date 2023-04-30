@@ -70,7 +70,8 @@ public class JobInfoServiceImpl extends ServiceImpl<JobInfoMapper, JobInfoDO> im
         Map<Long, JobDetailDO> map = jobDetailDOs.stream().collect(toMap(JobDetailDO::getJobId, jobDetailDO -> jobDetailDO));
         jobInfoResVOList.forEach(jobInfoResVO -> {
             JobDetailDO jobDetailDO = map.get(Long.parseLong(jobInfoResVO.getId()));
-            JobInfoConvert.INSTANCE.merge(jobInfoResVO,jobDetailDO);
+            JobDetailResVO jobDetailResVO = JobDetailConvert.INSTANCE.convert(jobDetailDO);
+            jobInfoResVO.setJobDetail(jobDetailResVO);
         });
     }
 
@@ -107,7 +108,8 @@ public class JobInfoServiceImpl extends ServiceImpl<JobInfoMapper, JobInfoDO> im
         jobInfoDO.setUserId(loginUser.getUserId());
         if(save(jobInfoDO)){
             //添加职位详情
-            JobDetailDO jobDetailDO = JobDetailConvert.INSTANCE.convert(jobInfoCreateReqVO);
+            JobDetailResVO jobDetail = jobInfoCreateReqVO.getJobDetail();
+            JobDetailDO jobDetailDO = JobDetailConvert.INSTANCE.convert(jobDetail);
             jobDetailDO.setJobId(jobInfoDO.getId());
             if(jobDetailMapper.insert(jobDetailDO)>0){
                 return JobInfoConvert.INSTANCE.convert(jobInfoDO);
@@ -122,9 +124,16 @@ public class JobInfoServiceImpl extends ServiceImpl<JobInfoMapper, JobInfoDO> im
      * @return
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public JobInfoResVO updateJobInfo(JobInfoUpdateReqVO jobInfoUpdateReqVO) {
         JobInfoDO jobInfoDO = JobInfoConvert.INSTANCE.convert(jobInfoUpdateReqVO);
         if(updateById(jobInfoDO)){
+            //更新职位详情
+            JobDetailResVO jobDetail = jobInfoUpdateReqVO.getJobDetail();
+            JobDetailDO jobDetailDO = JobDetailConvert.INSTANCE.convert(jobDetail);
+            if(jobDetailMapper.updateById(jobDetailDO)>0){
+                return JobInfoConvert.INSTANCE.convert(jobInfoDO);
+            }
             return JobInfoConvert.INSTANCE.convert(jobInfoDO);
         }
         throw new ServiceException("更新职位失败");
@@ -164,7 +173,8 @@ public class JobInfoServiceImpl extends ServiceImpl<JobInfoMapper, JobInfoDO> im
             JobDetailDO jobDetailDO = jobDetailMapper.selectOne(Wrappers.lambdaQuery(JobDetailDO.class).eq(JobDetailDO::getJobId, id));
 
             if(jobDetailDO!=null){
-                JobInfoResVO jobInfoResVO = JobInfoConvert.INSTANCE.convert(jobInfoDO, jobDetailDO);
+                JobInfoResVO jobInfoResVO = JobInfoConvert.INSTANCE.convert(jobInfoDO);
+                jobInfoResVO.setJobDetail(JobDetailConvert.INSTANCE.convert(jobDetailDO));
                 jobInfoResVO.setCoName(companyDO.getName());
                 return jobInfoResVO;
             }
@@ -189,5 +199,18 @@ public class JobInfoServiceImpl extends ServiceImpl<JobInfoMapper, JobInfoDO> im
             addJobDetail(jobInfoResVOList);
         }
         return jobInfoResVOList;
+    }
+
+    /**
+     * @param id
+     * @return
+     */
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public Boolean deleteJobInfoById(Long id) {
+        if(removeById(id)){
+            jobDetailMapper.delete(Wrappers.lambdaQuery(JobDetailDO.class).eq(JobDetailDO::getJobId, id));
+        }
+        return true;
     }
 }

@@ -63,8 +63,8 @@ public class JobInfoController {
      */
     @ApiOperation("删除职位信息")
     @DeleteMapping("/delete/{id}")
-    public Result<Boolean> deleteComPanyById(@PathVariable("id") Long id){
-        return ResultUtils.success("删除职位信息成功！",jobInfoService.removeById(id));
+    public Result<Boolean> deleteJobInfoById(@PathVariable("id") Long id){
+        return ResultUtils.success("删除职位信息成功！",jobInfoService.deleteJobInfoById(id));
     }
     /**
      * 根据用户获取职位信息

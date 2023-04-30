@@ -26,10 +26,6 @@ public class JobInfoBaseVO {
     private String positionId;
     private String positionName;
     private String jobName;
-    private String jobAddr;
-    private String jobSalary;
-    private String jobEdu;
-    private String jobQualification;
     private String jobStatus;
-    private String jobDescribe;
+    private JobDetailResVO jobDetail;
 }
